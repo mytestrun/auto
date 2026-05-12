@@ -1,0 +1,1640 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoPro Parts & Service – Bahrain</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════ */
+:root{
+  --gold:#C9A84C; --gold2:#E8C96A; --gold3:rgba(201,168,76,.12);
+  --red:#C62828; --red2:#9B1B1B;
+  --dark:#080808; --d1:#0F0F0F; --d2:#161616; --d3:#1E1E1E; --d4:#262626; --d5:#2E2E2E;
+  --g1:#AAAAAA; --g2:#707070; --g3:#404040; --g4:#2A2A2A;
+  --light:#ECECEC; --white:#FFFFFF;
+  --green:#2E7D32; --amber:#D97706;
+  --ff:'Rajdhani',sans-serif; --fb:'Inter',sans-serif; --fm:'JetBrains Mono',monospace;
+  --r:3px; --rl:8px;
+  --shadow:0 4px 24px rgba(0,0,0,.6);
+  --glow:0 0 20px rgba(201,168,76,.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--fb);background:var(--dark);color:var(--light);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--gold3);color:var(--gold2);}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--d2);}::-webkit-scrollbar-thumb{background:var(--g3);border-radius:3px;}
+
+.page{display:none;}.page.on{display:block;}
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden;}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+nav{background:rgba(8,8,8,.97);border-bottom:1px solid rgba(201,168,76,.2);position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:64px;gap:4px;}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;margin-right:8px;}
+.logo-mark{width:36px;height:36px;background:var(--gold);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--ff);font-size:18px;font-weight:700;color:var(--dark);letter-spacing:1px;flex-shrink:0;}
+.logo-text{font-family:var(--ff);font-size:22px;font-weight:700;letter-spacing:4px;color:var(--white);}
+.logo-text span{color:var(--gold);}
+.logo-sub{font-family:var(--fm);font-size:8px;color:var(--g2);letter-spacing:2px;display:block;margin-top:-3px;}
+.nav-links{display:flex;gap:1px;margin-left:auto;}
+.nl{padding:6px 13px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;color:var(--g1);background:none;border:none;font-family:var(--fb);transition:all .18s;white-space:nowrap;letter-spacing:.3px;}
+.nl:hover{color:var(--white);background:var(--d4);}
+.nl.on{color:var(--gold);background:var(--gold3);border-bottom:1px solid var(--gold);}
+.nav-divider{width:1px;height:20px;background:var(--g3);margin:0 6px;flex-shrink:0;}
+.cart-btn{display:flex;align-items:center;gap:8px;padding:8px 18px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .18s;margin-left:8px;white-space:nowrap;flex-shrink:0;letter-spacing:.5px;text-transform:uppercase;}
+.cart-btn:hover{background:linear-gradient(135deg,var(--gold2),var(--gold));transform:translateY(-1px);box-shadow:0 4px 14px rgba(201,168,76,.3);}
+.cart-cnt{background:var(--dark);color:var(--gold);border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:auto;}
+.ham-btn span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;transition:all .2s;}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--d1);border-bottom:1px solid rgba(201,168,76,.2);z-index:190;padding:14px;}
+.mobile-menu.open{display:block;}
+.mobile-menu .nl{display:block;width:100%;text-align:left;padding:12px 16px;margin-bottom:3px;font-size:14px;border-radius:var(--r);}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero{min-height:88vh;display:flex;align-items:center;background:var(--d1);position:relative;overflow:hidden;}
+.hero-video-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 80% at 80% 50%,rgba(201,168,76,.06) 0%,transparent 65%),
+  radial-gradient(ellipse 40% 40% at 20% 80%,rgba(198,40,40,.04) 0%,transparent 60%);
+}
+.hero-lines{position:absolute;inset:0;overflow:hidden;opacity:.4;}
+.hero-lines::before{content:'';position:absolute;top:-50%;left:-10%;width:140%;height:200%;background:repeating-linear-gradient(100deg,transparent,transparent 59px,rgba(201,168,76,.05) 60px);}
+.hero-lines::after{content:'';position:absolute;top:-50%;left:-10%;width:140%;height:200%;background:repeating-linear-gradient(10deg,transparent,transparent 59px,rgba(255,255,255,.02) 60px);}
+.hero-inner{max-width:1400px;margin:0 auto;padding:80px 24px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:center;width:100%;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.eyebrow-line{width:32px;height:1px;background:var(--gold);}
+.eyebrow-text{font-family:var(--fm);font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;}
+.hero h1{font-family:var(--ff);font-size:clamp(52px,6.5vw,100px);font-weight:700;line-height:.92;letter-spacing:1px;color:var(--white);margin-bottom:10px;}
+.hero h1 .accent{color:var(--gold);display:block;}
+.hero-sub{font-size:15px;color:var(--g1);max-width:500px;line-height:1.7;margin-bottom:36px;font-weight:300;}
+.hero-sub strong{color:var(--gold2);font-weight:500;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-gold{padding:13px 32px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .18s;letter-spacing:.5px;text-transform:uppercase;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.35);}
+.btn-outline{padding:13px 32px;background:none;color:var(--white);border:1px solid var(--g3);border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--fb);transition:all .18s;letter-spacing:.3px;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gold3);}
+.hero-badges{display:flex;gap:24px;flex-wrap:wrap;}
+.hero-badge{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--g2);}
+.hero-badge::before{content:'✓';color:var(--gold);font-weight:700;}
+/* Right panel */
+.hero-panel{display:flex;flex-direction:column;gap:14px;}
+.hp-card{background:var(--d3);border:1px solid var(--g3);border-radius:var(--rl);padding:20px 24px;transition:border .2s;}
+.hp-card:hover{border-color:rgba(201,168,76,.35);}
+.hp-card.gold-border{border-color:rgba(201,168,76,.3);background:linear-gradient(135deg,var(--d3),rgba(201,168,76,.04));}
+.hp-n{font-family:var(--ff);font-size:42px;font-weight:700;color:var(--gold);line-height:1;}
+.hp-l{font-size:11px;color:var(--g2);margin-top:4px;font-family:var(--fm);letter-spacing:1px;}
+.hp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* ═══════════════════════════════════════
+   TRUST BAR
+═══════════════════════════════════════ */
+.trust-bar{background:var(--d2);border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15);padding:0;}
+.trust-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:rgba(201,168,76,.06);}
+.trust-item{padding:20px 16px;text-align:center;border-right:1px solid rgba(201,168,76,.1);}
+.trust-item:last-child{border-right:none;}
+.trust-n{font-family:var(--ff);font-size:36px;font-weight:700;color:var(--white);}
+.trust-n span{color:var(--gold);}
+.trust-l{font-size:10px;color:var(--g2);font-family:var(--fm);letter-spacing:1.5px;margin-top:3px;text-transform:uppercase;}
+
+/* ═══════════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════════ */
+.section{padding:64px 0;}
+.section-inner{max-width:1400px;margin:0 auto;padding:0 24px;}
+.section-head{margin-bottom:40px;}
+.sh-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.sh-line{width:24px;height:1px;background:var(--gold);}
+.sh-tag{font-family:var(--fm);font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;}
+.sh-title{font-family:var(--ff);font-size:clamp(28px,3.5vw,46px);font-weight:700;letter-spacing:1px;color:var(--white);}
+.sh-title em{color:var(--gold);font-style:normal;}
+.sh-sub{font-size:14px;color:var(--g2);margin-top:8px;max-width:560px;line-height:1.6;}
+.sh-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+
+/* ═══════════════════════════════════════
+   PAGE TABS (inventory / oils / workshop)
+═══════════════════════════════════════ */
+.page-tabs{background:var(--d1);border-bottom:1px solid var(--g3);position:sticky;top:64px;z-index:90;}
+.pt-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;gap:0;}
+.pt{padding:14px 24px;background:none;border:none;color:var(--g2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--fb);border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;letter-spacing:.3px;}
+.pt:hover{color:var(--white);}
+.pt.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   FILTERS
+═══════════════════════════════════════ */
+.filters-bar{background:var(--d2);border-bottom:1px solid var(--g3);padding:12px 24px;}
+.fi{max-width:1400px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.sw{flex:1;min-width:200px;position:relative;}
+.sw input{width:100%;padding:9px 14px 9px 36px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:13px;font-family:var(--fb);outline:none;transition:border .15s;}
+.sw input::placeholder{color:var(--g2);}
+.sw input:focus{border-color:var(--gold);}
+.sw-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--g2);pointer-events:none;}
+.fsel{padding:9px 12px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:13px;font-family:var(--fb);cursor:pointer;outline:none;}
+.fsel:focus{border-color:var(--gold);}
+.fsel option{background:var(--d2);}
+.fbtn{padding:9px 16px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--g2);font-size:11px;cursor:pointer;font-family:var(--fm);transition:all .15s;letter-spacing:.5px;}
+.fbtn.on{background:var(--gold3);border-color:var(--gold);color:var(--gold);}
+.live-dot{display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;color:#4CAF50;margin-left:auto;letter-spacing:.5px;}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(76,175,80,.4);}50%{opacity:.5;}}
+
+/* ═══════════════════════════════════════
+   PRODUCT GRID
+═══════════════════════════════════════ */
+.prod-wrap{max-width:1400px;margin:0 auto;padding:20px 24px 48px;}
+.res-info{font-size:11px;color:var(--g2);font-family:var(--fm);margin-bottom:16px;letter-spacing:.5px;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:18px;}
+.pc{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;cursor:pointer;}
+.pc:hover{border-color:rgba(201,168,76,.4);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5);}
+.pc-img-wrap{position:relative;overflow:hidden;background:var(--d3);height:185px;}
+.pc-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.pc:hover .pc-img-wrap img{transform:scale(1.06);}
+.pc-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:52px;background:linear-gradient(135deg,var(--d3),var(--d4));}
+.stag{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:3px;font-size:10px;font-family:var(--fm);font-weight:500;letter-spacing:.5px;}
+.s-in{background:rgba(46,125,50,.25);color:#81C784;border:1px solid rgba(46,125,50,.4);}
+.s-low{background:rgba(217,119,6,.25);color:#FCD34D;border:1px solid rgba(217,119,6,.4);}
+.s-out{background:rgba(198,40,40,.2);color:#F87171;border:1px solid rgba(198,40,40,.35);}
+.dealer-badge{position:absolute;top:10px;left:10px;padding:3px 8px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border-radius:3px;font-size:9px;font-family:var(--fm);font-weight:700;letter-spacing:1px;}
+.pc-body{padding:16px;flex:1;display:flex;flex-direction:column;}
+.pc-cat{font-size:9px;color:var(--gold);font-family:var(--fm);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.pc-name{font-family:var(--ff);font-size:16px;font-weight:600;color:var(--white);line-height:1.25;margin-bottom:3px;}
+.pc-sku{font-family:var(--fm);font-size:10px;color:var(--g2);margin-bottom:10px;}
+.pc-meta{flex:1;display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.pc-row{display:flex;justify-content:space-between;font-size:12px;}
+.pc-lbl{color:var(--g2);}
+.pc-val{color:var(--light);font-weight:500;}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--g3);padding-top:12px;margin-top:auto;gap:8px;}
+.pc-price{font-family:var(--ff);font-size:22px;font-weight:700;color:var(--white);}
+.pc-price small{font-size:11px;color:var(--g2);font-family:var(--fb);}
+.btn-add{padding:7px 14px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .18s;white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;}
+.btn-add:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,168,76,.3);}
+.btn-avail{padding:7px 10px;background:none;color:#FCD34D;border:1px solid rgba(217,119,6,.4);border-radius:var(--r);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:all .15s;white-space:nowrap;}
+.btn-avail:hover{background:rgba(217,119,6,.1);border-color:#FCD34D;}
+
+/* ═══════════════════════════════════════
+   OILS PAGE
+═══════════════════════════════════════ */
+.oils-hero{background:linear-gradient(135deg,var(--d1) 0%,rgba(201,168,76,.06) 50%,var(--d1) 100%);border-bottom:1px solid rgba(201,168,76,.15);padding:48px 24px;}
+.oils-hero-inner{max-width:1400px;margin:0 auto;}
+.oils-brands{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;}
+.brand-pill{padding:8px 20px;border-radius:40px;font-family:var(--ff);font-size:14px;font-weight:600;letter-spacing:1px;border:1px solid var(--g3);color:var(--g1);transition:all .2s;cursor:pointer;}
+.brand-pill.dealer{background:linear-gradient(135deg,var(--gold3),rgba(201,168,76,.08));border-color:var(--gold);color:var(--gold);}
+.brand-pill.dealer::after{content:' ★ DEALER';font-size:9px;font-family:var(--fm);letter-spacing:1px;vertical-align:super;}
+.brand-pill:hover{border-color:var(--g1);color:var(--white);}
+.brand-pill.on{border-color:var(--gold);color:var(--gold);background:var(--gold3);}
+
+/* ═══════════════════════════════════════
+   WORKSHOP / SERVICES
+═══════════════════════════════════════ */
+.ws-hero{background:var(--d1);border-bottom:1px solid var(--g3);padding:48px 24px;}
+.ws-inner{max-width:1400px;margin:0 auto;}
+.ws-cats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+.ws-cat{padding:8px 18px;border-radius:var(--r);font-size:12px;font-weight:500;border:1px solid var(--g3);color:var(--g2);cursor:pointer;font-family:var(--fb);transition:all .18s;background:none;}
+.ws-cat:hover{border-color:var(--g2);color:var(--white);}
+.ws-cat.on{background:var(--gold3);border-color:var(--gold);color:var(--gold);}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.svc-card{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;}
+.svc-card:hover{border-color:rgba(201,168,76,.35);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4);}
+.svc-card-top{padding:24px;flex:1;}
+.svc-icon-wrap{width:52px;height:52px;border-radius:var(--rl);background:var(--gold3);border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;}
+.svc-card h3{font-family:var(--ff);font-size:20px;font-weight:700;letter-spacing:.5px;margin-bottom:8px;}
+.svc-card p{font-size:13px;color:var(--g2);line-height:1.6;margin-bottom:14px;}
+.svc-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.svc-tag{padding:3px 9px;background:var(--d4);border-radius:3px;font-size:10px;color:var(--g2);font-family:var(--fm);}
+.svc-card-foot{padding:16px 24px;border-top:1px solid var(--g3);display:flex;align-items:center;justify-content:space-between;background:rgba(201,168,76,.03);}
+.svc-price{font-family:var(--ff);font-size:16px;font-weight:700;color:var(--gold);}
+.svc-time{font-family:var(--fm);font-size:10px;color:var(--g2);}
+.btn-book{padding:8px 18px;background:none;border:1px solid var(--gold);color:var(--gold);border-radius:var(--r);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:all .18s;text-transform:uppercase;letter-spacing:.5px;}
+.btn-book:hover{background:var(--gold);color:var(--dark);}
+
+/* ═══════════════════════════════════════
+   CART SIDEBAR
+═══════════════════════════════════════ */
+.cart-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;}
+.cart-ov.on{display:block;}
+.cart-side{position:fixed;right:0;top:0;width:420px;max-width:100vw;height:100dvh;background:var(--d1);border-left:1px solid rgba(201,168,76,.2);z-index:301;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+.cart-side.on{transform:none;}
+.cart-hd{padding:18px 22px;border-bottom:1px solid var(--g3);display:flex;align-items:center;justify-content:space-between;background:var(--d2);}
+.cart-hd h3{font-family:var(--ff);font-size:20px;font-weight:700;letter-spacing:2px;color:var(--white);}
+.cart-hd h3 span{color:var(--gold);}
+.x-btn{width:32px;height:32px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--g1);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.x-btn:hover{border-color:var(--red);color:var(--red);}
+.cart-list{flex:1;overflow-y:auto;padding:14px 22px;}
+.empty-cart{text-align:center;padding:56px 0;color:var(--g2);font-size:13px;line-height:2;}
+.empty-cart .ec-icon{font-size:40px;margin-bottom:12px;opacity:.4;}
+.ci{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--d4);}
+.ci-ph{width:48px;height:48px;border-radius:var(--r);background:var(--d3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:1px solid var(--g3);}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-size:13px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--ff);letter-spacing:.3px;}
+.ci-sku{font-family:var(--fm);font-size:10px;color:var(--g2);margin-top:2px;}
+.ci-ctrl{display:flex;align-items:center;gap:7px;margin-top:8px;}
+.qb{width:26px;height:26px;background:var(--d3);border:1px solid var(--g3);color:var(--white);border-radius:var(--r);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.qb:hover{border-color:var(--gold);color:var(--gold);}
+.qn{font-family:var(--fm);font-size:12px;min-width:22px;text-align:center;color:var(--gold);}
+.rm-btn{background:none;border:none;color:var(--g3);cursor:pointer;font-size:13px;margin-left:4px;transition:color .15s;}
+.rm-btn:hover{color:var(--red);}
+.ci-price{font-family:var(--ff);font-size:18px;font-weight:700;align-self:center;flex-shrink:0;color:var(--white);}
+.cart-ft{padding:18px 22px;border-top:1px solid var(--g3);background:var(--d2);}
+.ct-row{display:flex;justify-content:space-between;font-size:12px;color:var(--g2);margin-bottom:6px;}
+.ct-total{display:flex;justify-content:space-between;align-items:center;margin:12px 0 16px;}
+.ct-lbl{font-size:14px;font-weight:600;color:var(--white);}
+.ct-num{font-family:var(--ff);font-size:32px;font-weight:700;color:var(--gold);}
+.enq-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .18s;text-transform:uppercase;letter-spacing:.5px;}
+.enq-btn:hover{box-shadow:0 6px 20px rgba(201,168,76,.3);}
+.enq-note{font-size:10px;color:var(--g2);text-align:center;margin-top:8px;font-family:var(--fm);}
+
+/* ═══════════════════════════════════════
+   MODALS
+═══════════════════════════════════════ */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:400;align-items:center;justify-content:center;padding:16px;}
+.modal-ov.on{display:flex;}
+
+/* Product detail */
+.prod-modal{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);max-width:660px;width:100%;max-height:90dvh;overflow-y:auto;}
+.pm-img{position:relative;height:250px;background:var(--d3);border-radius:var(--rl) var(--rl) 0 0;overflow:hidden;}
+.pm-img img{width:100%;height:100%;object-fit:cover;}
+.pm-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:72px;}
+.pm-close{position:absolute;top:12px;right:12px;width:32px;height:32px;background:rgba(0,0,0,.7);border:1px solid var(--g3);border-radius:50%;color:var(--white);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.pm-body{padding:24px;}
+.pm-cat{font-family:var(--fm);font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;}
+.pm-body h3{font-family:var(--ff);font-size:28px;font-weight:700;margin-bottom:16px;}
+.pm-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.pm-spec{padding:11px 13px;background:var(--d3);border-radius:var(--r);border:1px solid var(--g3);}
+.pm-sl{font-size:10px;color:var(--g2);font-family:var(--fm);margin-bottom:3px;}
+.pm-sv{font-size:13px;font-weight:600;}
+.pm-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--g3);gap:10px;flex-wrap:wrap;}
+.pm-price{font-family:var(--ff);font-size:36px;font-weight:700;color:var(--white);}
+
+/* Availability / Service / Login modals share .modal-box */
+.modal-box{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);max-width:500px;width:100%;padding:30px;max-height:90dvh;overflow-y:auto;}
+.modal-box h3{font-family:var(--ff);font-size:24px;font-weight:700;letter-spacing:1px;margin-bottom:5px;}
+.modal-box h3 em{color:var(--gold);font-style:normal;}
+.modal-tag{font-family:var(--fm);font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:16px;}
+
+/* ═══════════════════════════════════════
+   FORMS
+═══════════════════════════════════════ */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg label{font-size:10px;color:var(--g1);font-family:var(--fm);letter-spacing:.8px;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{padding:10px 13px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:13px;font-family:var(--fb);outline:none;transition:border .15s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--g2);}
+.fg select option{background:var(--d2);}
+.fg textarea{resize:vertical;min-height:70px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+
+/* Captcha */
+.captcha-box{background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);padding:13px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.captcha-box label{font-size:10px;color:var(--g1);font-family:var(--fm);letter-spacing:.8px;}
+.cap-q{font-family:var(--fm);font-size:15px;color:var(--white);background:var(--d4);padding:6px 13px;border-radius:var(--r);border:1px solid var(--g3);}
+.cap-inp{width:65px;padding:7px 10px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:14px;font-family:var(--fm);outline:none;text-align:center;}
+.cap-inp:focus{border-color:var(--gold);}
+.cap-ref{background:none;border:none;color:var(--g2);cursor:pointer;font-size:18px;transition:color .15s;}
+.cap-ref:hover{color:var(--gold);}
+.cap-st{font-family:var(--fm);font-size:11px;}
+.cap-ok{color:#81C784;}.cap-err{color:#F87171;}
+
+/* Submit buttons */
+.btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--fb);transition:all .18s;text-transform:uppercase;letter-spacing:.5px;}
+.btn-submit:hover{box-shadow:0 6px 20px rgba(201,168,76,.3);transform:translateY(-1px);}
+.btn-submit:disabled{background:var(--d4);color:var(--g2);cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* ═══════════════════════════════════════
+   ENQUIRY PAGE
+═══════════════════════════════════════ */
+.enq-page{max-width:820px;margin:0 auto;padding:40px 24px;}
+.enq-card{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);padding:28px;margin-bottom:18px;}
+.enq-card h3{font-family:var(--ff);font-size:22px;font-weight:700;letter-spacing:1px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--g3);}
+.enq-card h3 em{color:var(--gold);font-style:normal;}
+.ois-empty{text-align:center;padding:28px 0;color:var(--g2);font-size:13px;}
+.ois-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--d4);}
+.ois-ph{width:42px;height:42px;border-radius:var(--r);background:var(--d4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ois-name{flex:1;font-size:13px;font-weight:500;line-height:1.4;}
+.ois-qty{font-family:var(--fm);font-size:11px;color:var(--g2);white-space:nowrap;}
+.ois-price{font-family:var(--ff);font-size:16px;font-weight:700;white-space:nowrap;color:var(--gold);}
+.ois-avail{font-family:var(--fm);font-size:10px;color:#FCD34D;background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.3);border-radius:3px;padding:2px 6px;display:inline-block;margin-top:3px;}
+.total-line{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--g3);}
+.total-line span:first-child{font-size:14px;font-weight:600;}
+.total-line span:last-child{font-family:var(--ff);font-size:28px;font-weight:700;color:var(--gold);}
+.persist-notice{background:rgba(46,125,50,.1);border:1px solid rgba(46,125,50,.3);border-radius:var(--r);padding:10px 14px;font-family:var(--fm);font-size:11px;color:#81C784;margin-bottom:16px;}
+
+/* Success */
+.success-wrap{text-align:center;padding:80px 24px;max-width:540px;margin:0 auto;}
+.success-wrap h2{font-family:var(--ff);font-size:48px;font-weight:700;letter-spacing:2px;margin-bottom:10px;}
+.success-wrap h2 em{color:var(--gold);font-style:normal;}
+.order-ref{font-family:var(--fm);font-size:18px;color:var(--gold);margin:14px 0;padding:10px 20px;background:var(--gold3);border:1px solid rgba(201,168,76,.3);border-radius:var(--r);display:inline-block;}
+
+/* ═══════════════════════════════════════
+   ADMIN
+═══════════════════════════════════════ */
+.admin-wrap{max-width:1400px;margin:0 auto;padding:36px 24px;}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.as-card{background:var(--d2);border:1px solid var(--g3);border-radius:var(--rl);padding:18px 22px;transition:border .2s;}
+.as-card:hover{border-color:rgba(201,168,76,.3);}
+.as-n{font-family:var(--ff);font-size:40px;font-weight:700;color:var(--white);}
+.as-l{font-size:10px;color:var(--g2);font-family:var(--fm);margin-top:4px;letter-spacing:1px;}
+.admin-tabs{display:flex;gap:2px;border-bottom:1px solid var(--g3);flex-wrap:wrap;}
+.atab{padding:10px 18px;background:none;border:none;color:var(--g2);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--fb);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;white-space:nowrap;letter-spacing:.3px;}
+.atab:hover{color:var(--light);}
+.atab.on{color:var(--gold);border-bottom-color:var(--gold);}
+.admin-sub{display:none;padding-top:20px;}.admin-sub.on{display:block;}
+.ot{width:100%;border-collapse:collapse;}
+.ot th{text-align:left;padding:9px 12px;background:var(--d3);color:var(--g2);font-size:10px;font-family:var(--fm);letter-spacing:1px;border-bottom:1px solid var(--g3);}
+.ot td{padding:11px 12px;border-bottom:1px solid var(--d4);font-size:12px;vertical-align:top;}
+.ot tr:hover td{background:var(--d3);}
+.sb{padding:3px 9px;border-radius:3px;font-size:10px;font-family:var(--fm);display:inline-block;font-weight:500;}
+.sb-new{background:rgba(198,40,40,.2);color:#F87171;border:1px solid rgba(198,40,40,.35);}
+.sb-avail{background:rgba(217,119,6,.2);color:#FCD34D;border:1px solid rgba(217,119,6,.35);}
+.sb-svc{background:rgba(59,130,246,.2);color:#93C5FD;border:1px solid rgba(59,130,246,.35);}
+.sb-cont{background:rgba(217,119,6,.15);color:#FCD34D;border:1px solid rgba(217,119,6,.3);}
+.sb-conf{background:rgba(46,125,50,.2);color:#81C784;border:1px solid rgba(46,125,50,.35);}
+.sb-done{background:rgba(100,100,100,.15);color:#888;border:1px solid rgba(100,100,100,.3);}
+.ssel{padding:4px 8px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:10px;font-family:var(--fm);cursor:pointer;outline:none;margin-top:5px;}
+.inv-t{width:100%;border-collapse:collapse;}
+.inv-t th{text-align:left;padding:9px 12px;background:var(--d3);color:var(--g2);font-size:10px;font-family:var(--fm);letter-spacing:1px;border-bottom:1px solid var(--g3);}
+.inv-t td{padding:9px 12px;border-bottom:1px solid var(--d4);font-size:12px;vertical-align:middle;}
+.inv-t tr:hover td{background:var(--d3);}
+.inv-thumb{width:38px;height:38px;border-radius:var(--r);object-fit:cover;border:1px solid var(--g3);}
+.inv-ph{width:38px;height:38px;border-radius:var(--r);background:var(--d4);display:flex;align-items:center;justify-content:center;font-size:16px;}
+.eq{width:68px;padding:5px 8px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:11px;font-family:var(--fm);text-align:center;outline:none;}
+.ep{width:88px;padding:5px 8px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:11px;font-family:var(--fm);text-align:right;outline:none;}
+.ei{width:140px;padding:5px 8px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:10px;font-family:var(--fm);outline:none;}
+.eq:focus,.ep:focus,.ei:focus{border-color:var(--gold);}
+.up-btn{padding:5px 12px;background:var(--gold3);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:var(--r);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:all .15s;}
+.up-btn:hover{background:var(--gold);color:var(--dark);}
+.ci-inp{padding:7px 11px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:12px;font-family:var(--fm);outline:none;width:100%;}
+.ci-inp:focus{border-color:var(--gold);}
+.upload-zone{border:2px dashed var(--g3);border-radius:var(--rl);padding:32px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:var(--gold3);}
+.upload-zone input[type=file]{display:none;}
+.upload-preview{background:var(--d3);border:1px solid var(--g3);border-radius:var(--rl);padding:16px;margin-bottom:14px;display:none;}
+.preview-table{width:100%;border-collapse:collapse;font-size:11px;}
+.preview-table th{text-align:left;padding:6px 10px;background:var(--d4);color:var(--g2);font-family:var(--fm);}
+.preview-table td{padding:6px 10px;border-bottom:1px solid var(--d4);}
+.apply-btn{padding:9px 22px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--r);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--fb);}
+.tpl-btn{padding:7px 16px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--g1);font-size:12px;cursor:pointer;font-family:var(--fm);transition:all .15s;}
+.tpl-btn:hover{border-color:var(--gold);color:var(--gold);}
+.upload-rules{background:var(--d4);border-radius:var(--r);padding:14px;font-family:var(--fm);font-size:11px;color:var(--g2);line-height:1.9;}
+.upload-rules strong{color:var(--white);}
+.setup-card{background:var(--d3);border:1px solid var(--g3);border-radius:var(--rl);padding:22px;margin-bottom:14px;}
+.setup-card h4{font-family:var(--ff);font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:12px;color:var(--gold);}
+.setup-card label{font-size:10px;color:var(--g1);font-family:var(--fm);display:block;margin-bottom:4px;letter-spacing:.8px;text-transform:uppercase;}
+.setup-card input{width:100%;padding:9px 11px;background:var(--dark);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:12px;font-family:var(--fm);outline:none;margin-bottom:10px;}
+.setup-card input:focus{border-color:var(--gold);}
+.save-cfg{padding:9px 22px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--r);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--fb);}
+.cfg-note{font-size:12px;color:var(--g2);line-height:1.65;margin-top:10px;}
+.cfg-note a{color:var(--gold);}
+.admin-logout-btn{padding:7px 16px;background:none;border:1px solid var(--g3);border-radius:var(--r);color:var(--g2);font-size:11px;font-family:var(--fm);cursor:pointer;transition:all .15s;}
+.admin-logout-btn:hover{border-color:var(--red);color:var(--red);}
+
+/* ═══════════════════════════════════════
+   ADMIN LOGIN
+═══════════════════════════════════════ */
+.login-overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;}
+.login-box{background:var(--d2);border:1px solid rgba(201,168,76,.3);border-radius:var(--rl);padding:40px 36px;width:100%;max-width:400px;text-align:center;box-shadow:0 0 60px rgba(201,168,76,.08);}
+.login-box .lock-icon{font-size:48px;margin-bottom:18px;}
+.login-box h2{font-family:var(--ff);font-size:32px;font-weight:700;letter-spacing:2px;margin-bottom:6px;}
+.login-box h2 em{color:var(--gold);font-style:normal;}
+.login-box p{font-size:12px;color:var(--g2);margin-bottom:24px;font-family:var(--fm);letter-spacing:.5px;}
+.login-inp{width:100%;padding:13px 14px;background:var(--d3);border:1px solid var(--g3);border-radius:var(--r);color:var(--white);font-size:15px;font-family:var(--fb);outline:none;text-align:center;letter-spacing:3px;margin-bottom:12px;transition:border .15s;}
+.login-inp:focus{border-color:var(--gold);}
+.login-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--gold),#A87A30);color:var(--dark);border:none;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--fb);text-transform:uppercase;letter-spacing:1px;transition:all .18s;margin-bottom:10px;}
+.login-btn:hover{box-shadow:0 6px 20px rgba(201,168,76,.3);}
+.login-btn:disabled{background:var(--d4);color:var(--g2);cursor:not-allowed;box-shadow:none;}
+.login-err{font-family:var(--fm);font-size:11px;color:#F87171;min-height:16px;margin-bottom:8px;}
+.login-attempts{font-family:var(--fm);font-size:10px;color:var(--g2);}
+.change-pwd-section{background:var(--d3);border:1px solid var(--g3);border-radius:var(--rl);padding:22px;margin-bottom:14px;}
+.change-pwd-section h4{font-family:var(--ff);font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:12px;color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--d2);border:1px solid rgba(201,168,76,.3);border-radius:var(--rl);padding:11px 20px;color:var(--white);font-size:13px;z-index:9999;opacity:0;transition:all .3s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.toast.on{transform:translateX(-50%) translateY(0);opacity:1;}
+.no-res{text-align:center;padding:48px 0;color:var(--g2);font-size:14px;}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{background:var(--d1);border-top:1px solid rgba(201,168,76,.15);padding:40px 24px 24px;}
+.footer-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:32px;}
+.footer-brand .logo-text{font-size:20px;margin-bottom:8px;}
+.footer-brand p{font-size:13px;color:var(--g2);line-height:1.6;max-width:260px;}
+.footer-col h4{font-family:var(--ff);font-size:14px;font-weight:700;letter-spacing:1px;color:var(--gold);margin-bottom:12px;}
+.footer-col p,.footer-link{font-size:13px;color:var(--g2);line-height:1.9;display:block;background:none;border:none;cursor:pointer;padding:0;font-family:var(--fb);text-align:left;transition:color .15s;}
+.footer-link:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--g3);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:11px;color:var(--g2);font-family:var(--fm);}
+.footer-bottom .gold-dot{color:var(--gold);}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1100px){.hero-inner{grid-template-columns:1fr;}.hero-panel{display:none;}.trust-inner{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.trust-inner{grid-template-columns:repeat(2,1fr);}.admin-stats{grid-template-columns:repeat(2,1fr);}.footer-inner{grid-template-columns:1fr 1fr;}}
+@media(max-width:680px){
+  .nav-links{display:none;}.ham-btn{display:flex;}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+  .pc-img-wrap{height:140px;}.pc-ph{font-size:38px;}
+  .cart-side{width:100%;max-width:100vw;}
+  .cart-btn .cart-label{display:none;}
+  .fgrid{grid-template-columns:1fr;}
+  .trust-inner{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr;}
+  .pm-specs{grid-template-columns:1fr;}
+  .hero h1{font-size:clamp(44px,11vw,72px);}
+  .admin-tabs{overflow-x:auto;}
+  .svc-grid{grid-template-columns:1fr;}
+}
+@media(max-width:420px){.prod-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="gPage('home')">
+      <div class="logo-mark">AP</div>
+      <div><div class="logo-text">AUTO<span>PRO</span></div><div class="logo-sub">BAHRAIN</div></div>
+    </div>
+    <div class="nav-links">
+      <button class="nl on" onclick="gPage('home')">Home</button>
+      <button class="nl" onclick="gPage('parts')">Spare Parts</button>
+      <button class="nl" onclick="gPage('oils')">Oils & Fuels</button>
+      <button class="nl" onclick="gPage('workshop')">Workshop</button>
+      <button class="nl" onclick="gPage('enquiry')">Request Order</button>
+      <div class="nav-divider"></div>
+      <button class="nl" onclick="requireAdmin()">⚙ Admin</button>
+    </div>
+    <button class="ham-btn" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 <span class="cart-label">Enquiry</span>&nbsp;<span class="cart-cnt" id="cart-cnt">0</span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="nl" onclick="gPage('home');closeMenu()">🏠 Home</button>
+  <button class="nl" onclick="gPage('parts');closeMenu()">🔩 Spare Parts</button>
+  <button class="nl" onclick="gPage('oils');closeMenu()">🛢 Oils & Fuels</button>
+  <button class="nl" onclick="gPage('workshop');closeMenu()">🔧 Workshop</button>
+  <button class="nl" onclick="gPage('enquiry');closeMenu()">📋 Request Order</button>
+  <button class="nl" onclick="requireAdmin();closeMenu()">⚙️ Admin</button>
+</div>
+
+<!-- ════════ ADMIN LOGIN ════════ -->
+<div class="login-overlay" id="admin-login-overlay" style="display:none;">
+  <div class="login-box">
+    <div class="lock-icon">🔐</div>
+    <h2>ADMIN <em>ACCESS</em></h2>
+    <p>// RESTRICTED — AUTHORISED STAFF ONLY</p>
+    <input class="login-inp" type="password" id="admin-pwd-inp" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password">
+    <div class="login-err" id="login-err"></div>
+    <button class="login-btn" onclick="doLogin()">LOGIN →</button>
+    <div class="login-attempts" id="login-attempts"></div>
+    <button style="background:none;border:none;color:var(--g2);font-size:12px;cursor:pointer;font-family:var(--fm);margin-top:8px;" onclick="closeAdminLogin()">← Back to site</button>
+  </div>
+</div>
+
+<!-- ════════ CART SIDEBAR ════════ -->
+<div class="cart-ov" id="cart-ov" onclick="toggleCart()"></div>
+<div class="cart-side" id="cart-side">
+  <div class="cart-hd"><h3>ENQUIRY <span>LIST</span></h3><button class="x-btn" onclick="toggleCart()">✕</button></div>
+  <div class="cart-list" id="cart-list"></div>
+  <div class="cart-ft">
+    <div class="ct-row"><span>Estimated Total</span><span id="cart-sub">BD 0.000</span></div>
+    <div class="ct-total"><span class="ct-lbl">Est. Total</span><span class="ct-num" id="cart-total">BD 0.000</span></div>
+    <button class="enq-btn" onclick="gotoEnq()">SEND ENQUIRY REQUEST →</button>
+    <div class="enq-note">// No payment required — we contact you to confirm</div>
+  </div>
+</div>
+
+<!-- ════════ PRODUCT MODAL ════════ -->
+<div class="modal-ov" id="prod-modal-ov"><div class="prod-modal" id="prod-modal-body"></div></div>
+
+<!-- ════════ AVAILABILITY MODAL ════════ -->
+<div class="modal-ov" id="avail-ov">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;">
+      <h3>CHECK <em>AVAILABILITY</em></h3><button class="x-btn" onclick="closeModal('avail-ov')">✕</button>
+    </div>
+    <div class="modal-tag" id="av-part-info"></div>
+    <p style="font-size:13px;color:var(--g1);margin-bottom:16px;line-height:1.6;">This item is currently out of stock. Send us your details and we'll check availability, lead time and price for you.</p>
+    <div class="fg"><label>Your Name *</label><input type="text" id="av-name" placeholder="Mohammed Al Khalifa"></div>
+    <div class="fg"><label>Mobile *</label><input type="tel" id="av-mobile" placeholder="+973 3XXX XXXX"></div>
+    <div class="fg"><label>Vehicle (helps us source correctly)</label><input type="text" id="av-vehicle" placeholder="Toyota Camry 2020"></div>
+    <div class="fg"><label>Your Query</label>
+      <select id="av-query"><option>When will it be in stock?</option><option>Can you source / import this?</option><option>Price & availability check</option><option>Expected delivery duration</option><option>All of the above</option></select>
+    </div>
+    <div class="fg"><label>Notes</label><textarea id="av-notes" placeholder="Any extra details…" style="min-height:56px;"></textarea></div>
+    <div class="hp-field"><input type="text" id="av-hp" tabindex="-1" autocomplete="off"></div>
+    <div class="captcha-box"><label>Human Verify:</label><span class="cap-q" id="av-cap-q"></span><span style="color:var(--g2);font-family:var(--fm)">=</span><input class="cap-inp" type="number" id="av-cap-a" placeholder="?" oninput="checkAvCap()"><button class="cap-ref" onclick="genAvCap()" title="New">↻</button><span class="cap-st" id="av-cap-st"></span></div>
+    <button class="btn-submit" onclick="submitAvailEnq()">SEND AVAILABILITY REQUEST</button>
+  </div>
+</div>
+
+<!-- ════════ SERVICE BOOKING MODAL ════════ -->
+<div class="modal-ov" id="svc-modal-ov">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:4px;">
+      <h3>BOOK <em>SERVICE</em></h3><button class="x-btn" onclick="closeModal('svc-modal-ov')">✕</button>
+    </div>
+    <div class="modal-tag" id="svc-modal-tag"></div>
+    <p style="font-size:13px;color:var(--g1);margin-bottom:16px;line-height:1.6;">Fill in your details. Our team will call you within the hour to confirm your slot.</p>
+    <div class="fgrid">
+      <div class="fg"><label>Name *</label><input type="text" id="svc-name" placeholder="Mohammed Al Khalifa"></div>
+      <div class="fg"><label>Mobile *</label><input type="tel" id="svc-mobile" placeholder="+973 3XXX XXXX"></div>
+    </div>
+    <div class="fg"><label>Vehicle</label><input type="text" id="svc-vehicle" placeholder="Toyota Camry 2020"></div>
+    <div class="fg"><label>Preferred Date</label><input type="date" id="svc-date"></div>
+    <div class="fg"><label>Preferred Time</label>
+      <select id="svc-time"><option>8:00 AM – 10:00 AM</option><option>10:00 AM – 12:00 PM</option><option>12:00 PM – 2:00 PM</option><option>2:00 PM – 4:00 PM</option><option>4:00 PM – 6:00 PM</option></select>
+    </div>
+    <div class="fg"><label>Notes / Symptoms</label><textarea id="svc-notes" placeholder="e.g. AC not cooling, pulling to one side…" style="min-height:60px;"></textarea></div>
+    <div class="hp-field"><input type="text" id="svc-hp" tabindex="-1" autocomplete="off"></div>
+    <div class="captcha-box"><label>Human Verify:</label><span class="cap-q" id="svc-cap-q"></span><span style="color:var(--g2);font-family:var(--fm)">=</span><input class="cap-inp" type="number" id="svc-cap-a" placeholder="?" oninput="checkSvcCap()"><button class="cap-ref" onclick="genSvcCap()" title="New">↻</button><span class="cap-st" id="svc-cap-st"></span></div>
+    <button class="btn-submit" onclick="submitSvcBooking()">CONFIRM BOOKING REQUEST</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════ -->
+<div class="page on" id="page-home">
+  <div class="hero">
+    <div class="hero-video-bg"></div><div class="hero-lines"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><div class="eyebrow-line"></div><div class="eyebrow-text">Bahrain's Premium Auto Specialist</div></div>
+        <h1>PERFORMANCE<br><span class="accent">PARTS &amp; SERVICE</span></h1>
+        <p class="hero-sub">Your authorised dealer for <strong>Panta</strong> & <strong>Ignite</strong> racing fuels and oils. Genuine spare parts, professional workshop, and expert motorsport solutions — all under one roof in Bahrain.</p>
+        <div class="hero-ctas">
+          <button class="btn-gold" onclick="gPage('parts')">Browse Spare Parts</button>
+          <button class="btn-outline" onclick="gPage('oils')">Oils &amp; Racing Fuels</button>
+          <button class="btn-outline" onclick="gPage('workshop')">Workshop Services</button>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge">Authorised Panta Dealer</div>
+          <div class="hero-badge">Authorised Ignite Dealer</div>
+          <div class="hero-badge">Daily Updated Inventory</div>
+          <div class="hero-badge">Same Day Enquiry Response</div>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hp-card gold-border"><div class="hp-n" id="h-stock">—</div><div class="hp-l">PARTS IN STOCK TODAY</div></div>
+        <div class="hp-grid">
+          <div class="hp-card"><div class="hp-n">500+</div><div class="hp-l">VEHICLE MODELS</div></div>
+          <div class="hp-card"><div class="hp-n">8</div><div class="hp-l">SERVICE BAYS</div></div>
+          <div class="hp-card"><div class="hp-n">24h</div><div class="hp-l">STOCK UPDATED</div></div>
+          <div class="hp-card"><div class="hp-n">2</div><div class="hp-l">FUEL BRANDS</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item"><div class="trust-n"><span id="h-stat">—</span></div><div class="trust-l">Parts in Stock</div></div>
+      <div class="trust-item"><div class="trust-n">500<span>+</span></div><div class="trust-l">Vehicle Models</div></div>
+      <div class="trust-item"><div class="trust-n"><span>★</span> 2</div><div class="trust-l">Fuel Dealerships</div></div>
+      <div class="trust-item"><div class="trust-n">8</div><div class="trust-l">Workshop Bays</div></div>
+      <div class="trust-item"><div class="trust-n">24<span>h</span></div><div class="trust-l">Inventory Refresh</div></div>
+    </div>
+  </div>
+
+  <!-- Featured Parts -->
+  <div class="section" style="background:var(--d1);">
+    <div class="section-inner">
+      <div class="sh-row section-head">
+        <div><div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Popular Stock</div></div><h2 class="sh-title">FEATURED <em>SPARE PARTS</em></h2></div>
+        <button class="btn-outline" style="font-size:12px;padding:9px 18px;" onclick="gPage('parts')">View All →</button>
+      </div>
+      <div class="prod-grid" id="feat-parts-grid"></div>
+    </div>
+  </div>
+
+  <!-- Featured Oils -->
+  <div class="section">
+    <div class="section-inner">
+      <div class="sh-row section-head">
+        <div><div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Authorised Dealer</div></div><h2 class="sh-title">OILS &amp; <em>RACING FUELS</em></h2></div>
+        <button class="btn-outline" style="font-size:12px;padding:9px 18px;" onclick="gPage('oils')">View All →</button>
+      </div>
+      <div class="prod-grid" id="feat-oils-grid"></div>
+    </div>
+  </div>
+
+  <!-- Workshop Highlight -->
+  <div class="section" style="background:var(--d1);">
+    <div class="section-inner">
+      <div class="sh-row section-head">
+        <div><div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Professional Workshop</div></div><h2 class="sh-title">WORKSHOP <em>SERVICES</em></h2></div>
+        <button class="btn-outline" style="font-size:12px;padding:9px 18px;" onclick="gPage('workshop')">All Services →</button>
+      </div>
+      <div class="svc-grid" id="feat-svc-grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo-text" style="font-family:var(--ff);font-size:20px;font-weight:700;letter-spacing:4px;margin-bottom:8px;">AUTO<span style="color:var(--gold)">PRO</span></div>
+        <p>Your trusted partner for premium spare parts, racing oils, and professional automotive services in Bahrain.</p>
+        <p style="margin-top:10px;color:var(--gold);font-size:12px;font-family:var(--fm);">★ Authorised dealer for Panta &amp; Ignite</p>
+      </div>
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <button class="footer-link" onclick="gPage('parts')">Spare Parts Inventory</button>
+        <button class="footer-link" onclick="gPage('oils')">Oils &amp; Racing Fuels</button>
+        <button class="footer-link" onclick="gPage('workshop')">Workshop Services</button>
+        <button class="footer-link" onclick="gPage('enquiry')">Request an Order</button>
+      </div>
+      <div class="footer-col">
+        <h4>CONTACT</h4>
+        <p>📍 Bahrain</p>
+        <p>📞 +973 XXXX XXXX</p>
+        <p>✉️ info@autopro-bh.com</p>
+        <p style="margin-top:8px;font-size:11px;font-family:var(--fm);color:var(--g2);">Sat–Thu: 8:00 AM – 6:00 PM</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AutoPro Bahrain<span class="gold-dot"> ·</span> All rights reserved</p>
+      <p>Built for performance<span class="gold-dot"> ★</span></p>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SPARE PARTS PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-parts">
+  <div class="section" style="padding:32px 0 0;">
+    <div class="section-inner">
+      <div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Live Inventory</div></div>
+      <h2 class="sh-title">SPARE <em>PARTS</em></h2>
+    </div>
+  </div>
+  <div class="filters-bar">
+    <div class="fi">
+      <div class="sw"><span class="sw-icon">⌕</span><input type="text" placeholder="Search by name, SKU, brand…" id="parts-search" oninput="filterParts()"></div>
+      <select class="fsel" id="parts-cat" onchange="filterParts()">
+        <option value="">All Categories</option>
+        <option>Engine Parts</option><option>Brakes &amp; Suspension</option><option>Electrical</option>
+        <option>Filters &amp; Fluids</option><option>Body &amp; Exterior</option>
+        <option>Transmission</option><option>Cooling System</option><option>Exhaust System</option>
+      </select>
+      <select class="fsel" id="parts-stk" onchange="filterParts()">
+        <option value="">All Stock</option>
+        <option value="in">In Stock</option><option value="low">Low Stock</option><option value="out">Out of Stock</option>
+      </select>
+      <button class="fbtn on" id="parts-sort-btn" onclick="togglePartsSort()">Price ↑</button>
+      <div class="live-dot">Live inventory</div>
+    </div>
+  </div>
+  <div class="prod-wrap">
+    <div class="res-info" id="parts-res-info"></div>
+    <div class="prod-grid" id="parts-grid"></div>
+    <div class="no-res" id="parts-no-res" style="display:none;">No parts match your search.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     OILS & FUELS PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-oils">
+  <div class="oils-hero">
+    <div class="oils-hero-inner">
+      <div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Authorised Dealer · Premium Brands</div></div>
+      <h2 class="sh-title" style="margin-bottom:8px;">OILS &amp; <em>RACING FUELS</em></h2>
+      <p style="font-size:14px;color:var(--g2);max-width:560px;line-height:1.6;">We are the authorised dealer for <strong style="color:var(--gold)">Panta</strong> and <strong style="color:var(--gold)">Ignite</strong> in Bahrain. We also carry Castrol, Motul, Shell, Mobil and more. Racing fuel, engine oils, gear oils, and specialty lubricants.</p>
+      <div class="oils-brands" id="oils-brand-pills"></div>
+    </div>
+  </div>
+  <div class="filters-bar">
+    <div class="fi">
+      <div class="sw"><span class="sw-icon">⌕</span><input type="text" placeholder="Search oils, fuels, lubricants…" id="oils-search" oninput="filterOils()"></div>
+      <select class="fsel" id="oils-cat" onchange="filterOils()">
+        <option value="">All Categories</option>
+        <option>Racing Fuel</option><option>Engine Oil</option><option>Gear Oil</option>
+        <option>Brake Fluid</option><option>Coolant</option><option>Specialty</option>
+      </select>
+      <button class="fbtn on" id="oils-sort-btn" onclick="toggleOilsSort()">Price ↑</button>
+      <div class="live-dot">Live stock</div>
+    </div>
+  </div>
+  <div class="prod-wrap">
+    <div class="res-info" id="oils-res-info"></div>
+    <div class="prod-grid" id="oils-grid"></div>
+    <div class="no-res" id="oils-no-res" style="display:none;">No products match your search.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     WORKSHOP PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-workshop">
+  <div class="ws-hero">
+    <div class="ws-inner">
+      <div class="sh-eyebrow"><div class="sh-line"></div><div class="sh-tag">Professional Workshop</div></div>
+      <h2 class="sh-title" style="margin-bottom:8px;">WORKSHOP <em>SERVICES</em></h2>
+      <p style="font-size:14px;color:var(--g2);max-width:560px;line-height:1.6;">State-of-the-art workshop with 8 service bays. From routine tyre changes to advanced performance tuning — our certified technicians handle it all.</p>
+      <div class="ws-cats" id="ws-cat-btns"></div>
+    </div>
+  </div>
+  <div class="section-inner" style="padding-top:32px;padding-bottom:48px;">
+    <div class="svc-grid" id="workshop-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ENQUIRY / REQUEST ORDER PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-enquiry">
+  <div id="enq-ok" style="display:none;">
+    <div class="success-wrap">
+      <div style="font-size:64px;margin-bottom:20px;">✅</div>
+      <h2>ENQUIRY <em>SENT!</em></h2>
+      <div class="order-ref" id="enq-ref"></div>
+      <p>Your request has been received. We will contact you shortly to confirm availability and arrange your order.</p>
+      <p style="color:var(--g2);font-size:12px;margin-top:10px;font-family:var(--fm);">All enquiries are permanently stored in the Admin panel.</p>
+      <button class="btn-gold" style="margin-top:26px;" onclick="resetEnq()">Browse More Products</button>
+    </div>
+  </div>
+  <div id="enq-form-wrap">
+    <div class="enq-page">
+      <div class="sh-eyebrow" style="margin-bottom:6px;"><div class="sh-line"></div><div class="sh-tag">Request an Order</div></div>
+      <h2 style="font-family:var(--ff);font-size:42px;font-weight:700;letter-spacing:2px;margin-bottom:6px;">SEND <em style="color:var(--gold);">ENQUIRY</em></h2>
+      <p style="color:var(--g2);font-size:13px;margin-bottom:20px;">No payment required. We review your request and contact you personally to confirm availability, pricing and delivery.</p>
+      <div class="persist-notice">✓ Your enquiry list is saved — it persists after page refresh. Submitted orders are permanently stored in the Admin panel.</div>
+      <div class="enq-card">
+        <h3>ITEMS <em>REQUESTED</em></h3>
+        <div id="enq-items-body"></div>
+      </div>
+      <div class="enq-card">
+        <h3>YOUR <em>DETAILS</em></h3>
+        <div class="fgrid">
+          <div class="fg"><label>First Name *</label><input type="text" id="e-fname" placeholder="Mohammed"></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="e-lname" placeholder="Al Khalifa"></div>
+          <div class="fg"><label>Mobile *</label><input type="tel" id="e-mobile" placeholder="+973 3XXX XXXX"></div>
+          <div class="fg"><label>Email</label><input type="email" id="e-email" placeholder="name@email.com"></div>
+        </div>
+        <div class="fg"><label>Vehicle (Make, Model, Year)</label><input type="text" id="e-vehicle" placeholder="Toyota Camry 2020 — helps verify part compatibility"></div>
+        <div class="fg"><label>Preferred Contact</label>
+          <select id="e-contact"><option>WhatsApp / Phone</option><option>Email</option><option>Either is fine</option></select>
+        </div>
+        <div class="fg"><label>Additional Notes</label><textarea id="e-notes" placeholder="Delivery area, urgency, special requirements…"></textarea></div>
+      </div>
+      <div class="enq-card" style="border-color:rgba(201,168,76,.3);">
+        <h3>SECURITY <em>VERIFICATION</em></h3>
+        <p style="font-size:13px;color:var(--g1);margin-bottom:16px;">Answer the question below to confirm you are a real person.</p>
+        <div class="hp-field"><input type="text" id="e-hp" tabindex="-1" autocomplete="off" name="website"></div>
+        <div class="captcha-box"><label>Human Verify:</label><span class="cap-q" id="cap-q">…</span><span style="color:var(--g2);font-family:var(--fm);font-size:16px;">=</span><input class="cap-inp" type="number" id="cap-a" placeholder="?" oninput="checkCap()"><button class="cap-ref" onclick="genCap()" title="New question">↻</button></div>
+        <div class="cap-st" id="cap-st" style="margin-top:4px;"></div>
+        <p style="font-size:10px;color:var(--g2);margin-top:10px;font-family:var(--fm);">// Max 3 enquiries per hour · Session protected</p>
+      </div>
+      <button class="btn-submit" id="sub-btn" onclick="submitEnq()">SEND ENQUIRY REQUEST</button>
+      <div id="rate-warn" style="font-family:var(--fm);font-size:11px;color:#F87171;text-align:center;margin-top:8px;display:none;">⚠ Too many submissions. Please wait before sending again.</div>
+      <p style="font-size:11px;color:var(--g2);text-align:center;margin-top:10px;font-family:var(--fm);">We respond within 1–2 hours · Sat–Thu 8 AM – 6 PM</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADMIN PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-admin">
+  <div class="admin-wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:24px;">
+      <div>
+        <div class="sh-eyebrow" style="margin-bottom:4px;"><div class="sh-line"></div><div class="sh-tag">Dashboard</div></div>
+        <h2 style="font-family:var(--ff);font-size:42px;font-weight:700;letter-spacing:2px;">ADMIN <em style="color:var(--gold);">PANEL</em></h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-family:var(--fm);font-size:11px;color:#81C784;">🔓 Logged in</span>
+        <button class="admin-logout-btn" onclick="doLogout()">Logout ↩</button>
+      </div>
+    </div>
+    <div class="admin-stats">
+      <div class="as-card"><div class="as-n" id="ad-stock">0</div><div class="as-l">// UNITS IN STOCK</div></div>
+      <div class="as-card"><div class="as-n" id="ad-low">0</div><div class="as-l">// LOW STOCK ALERTS</div></div>
+      <div class="as-card"><div class="as-n" id="ad-orders">0</div><div class="as-l">// TOTAL ENQUIRIES</div></div>
+      <div class="as-card"><div class="as-n" id="ad-new">0</div><div class="as-l">// NEW UNREAD</div></div>
+    </div>
+    <div class="admin-tabs">
+      <button class="atab on" onclick="aTab('orders')">📋 Order Enquiries</button>
+      <button class="atab" onclick="aTab('parts-inv')">🔩 Parts Inventory</button>
+      <button class="atab" onclick="aTab('oils-inv')">🛢 Oils Inventory</button>
+      <button class="atab" onclick="aTab('upload')">📂 CSV/JSON Upload</button>
+      <button class="atab" onclick="aTab('email')">✉️ Email Alerts</button>
+      <button class="atab" onclick="aTab('password')">🔑 Password</button>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="admin-sub on" id="atab-orders">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+        <input class="ci-inp" style="flex:1;min-width:140px;" type="text" placeholder="Search ref, name, mobile…" id="o-search" oninput="renderOrders()">
+        <select class="fsel" id="o-sf" onchange="renderOrders()">
+          <option value="">All Types</option>
+          <option value="order">Order Enquiry</option><option value="availability">Availability Check</option><option value="service">Service Booking</option>
+        </select>
+        <button class="up-btn" onclick="exportOrders()">Export CSV</button>
+        <button class="up-btn" style="background:none;border:1px solid var(--g3);color:var(--g2);" onclick="clearCompleted()">Clear Completed</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="ot">
+          <thead><tr><th>REF</th><th>TYPE</th><th>DATE</th><th>CUSTOMER</th><th>MOBILE</th><th>VEHICLE</th><th>ITEMS</th><th>TOTAL</th><th>STATUS</th></tr></thead>
+          <tbody id="o-tbody"></tbody>
+        </table>
+        <div id="no-orders" style="display:none;text-align:center;padding:32px;color:var(--g2);font-size:13px;">No enquiries received yet.</div>
+      </div>
+    </div>
+
+    <!-- PARTS INVENTORY -->
+    <div class="admin-sub" id="atab-parts-inv">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+        <input class="ci-inp" style="flex:1;min-width:140px;" type="text" placeholder="Search parts…" id="pi-search" oninput="renderPartsInv()">
+        <button class="up-btn" onclick="exportInv('parts')">Export CSV</button>
+        <button class="up-btn" style="background:none;border:1px solid var(--g3);color:var(--g2);" onclick="simRefresh('parts')">🔄 Simulate Refresh</button>
+        <span style="font-family:var(--fm);font-size:10px;color:var(--g2);" id="pi-upd"></span>
+      </div>
+      <div style="overflow-x:auto;"><table class="inv-t"><thead><tr><th>IMG</th><th>SKU</th><th>NAME</th><th>CAT</th><th>PRICE BD</th><th>STOCK</th><th>NEW QTY</th><th>IMG URL</th><th>ACTION</th></tr></thead><tbody id="pi-tbody"></tbody></table></div>
+    </div>
+
+    <!-- OILS INVENTORY -->
+    <div class="admin-sub" id="atab-oils-inv">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px;">
+        <input class="ci-inp" style="flex:1;min-width:140px;" type="text" placeholder="Search oils…" id="oi-search" oninput="renderOilsInv()">
+        <button class="up-btn" onclick="exportInv('oils')">Export CSV</button>
+        <button class="up-btn" style="background:none;border:1px solid var(--g3);color:var(--g2);" onclick="simRefresh('oils')">🔄 Simulate Refresh</button>
+        <span style="font-family:var(--fm);font-size:10px;color:var(--g2);" id="oi-upd"></span>
+      </div>
+      <div style="overflow-x:auto;"><table class="inv-t"><thead><tr><th>IMG</th><th>SKU</th><th>NAME</th><th>BRAND</th><th>CAT</th><th>PRICE BD</th><th>STOCK</th><th>NEW QTY</th><th>IMG URL</th><th>ACTION</th></tr></thead><tbody id="oi-tbody"></tbody></table></div>
+    </div>
+
+    <!-- CSV / JSON UPLOAD -->
+    <div class="admin-sub" id="atab-upload">
+      <p style="font-size:13px;color:var(--g1);margin-bottom:16px;line-height:1.6;">Upload a CSV or JSON file to bulk-update your parts or oils inventory. Choose the target inventory below.</p>
+      <div class="fg" style="max-width:300px;margin-bottom:20px;"><label>Update Target</label><select class="fsel" id="upload-target" style="width:100%;"><option value="parts">Spare Parts</option><option value="oils">Oils & Fuels</option></select></div>
+      <h4 style="font-family:var(--ff);font-weight:700;font-size:16px;letter-spacing:1px;margin-bottom:8px;">STEP 1 — DOWNLOAD TEMPLATE</h4>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
+        <button class="tpl-btn" onclick="dlCSVTemplate()">⬇ CSV Template</button>
+        <button class="tpl-btn" onclick="dlJSONTemplate()">⬇ JSON Template</button>
+        <button class="tpl-btn" onclick="exportCurrentCSV()">⬇ Current Inventory</button>
+      </div>
+      <h4 style="font-family:var(--ff);font-weight:700;font-size:16px;letter-spacing:1px;margin-bottom:8px;">STEP 2 — UPLOAD</h4>
+      <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-in').click()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+        <input type="file" id="file-in" accept=".csv,.json" onchange="handleFile(this.files[0])">
+        <div style="font-size:36px;margin-bottom:8px;">📂</div>
+        <div style="font-family:var(--ff);font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:4px;">Click or drag & drop</div>
+        <p style="font-size:12px;color:var(--g2);">Supported: .csv and .json</p>
+        <p style="font-family:var(--fm);font-size:11px;color:var(--gold);margin-top:6px;">// SKU used to match — new SKUs will be added</p>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:12px;flex-wrap:wrap;">
+        <label style="font-size:12px;color:var(--g1);font-family:var(--fm);">MODE:</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="up-mode" value="merge" checked style="accent-color:var(--gold)"> Merge (update matched SKUs)</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;"><input type="radio" name="up-mode" value="replace"> Replace All</label>
+      </div>
+      <div class="upload-preview" id="upload-preview">
+        <h5 style="font-family:var(--ff);font-size:16px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">PREVIEW — <span id="preview-count"></span></h5>
+        <div style="display:flex;gap:10px;font-family:var(--fm);font-size:11px;color:var(--g1);margin-bottom:10px;flex-wrap:wrap;" id="preview-stats"></div>
+        <div style="max-height:200px;overflow-y:auto;margin-bottom:12px;border-radius:var(--r);">
+          <table class="preview-table"><thead><tr><th>SKU</th><th>Name</th><th>Category</th><th>Price BD</th><th>Stock</th><th>Status</th></tr></thead><tbody id="preview-tbody"></tbody></table>
+        </div>
+        <button class="apply-btn" onclick="applyUpload()">✓ Apply to Inventory</button>
+        <button style="margin-left:8px;padding:9px 18px;background:none;border:1px solid var(--g3);border-radius:var(--r);color:var(--g1);font-size:12px;cursor:pointer;" onclick="cancelUpload()">Cancel</button>
+      </div>
+      <div class="upload-rules" style="margin-top:16px;">
+        <strong>CSV:</strong> Required: <span style="color:var(--gold)">sku, name, stock</span> · Optional: category, price, brand, compatibility, img, dealer<br>
+        <strong>JSON:</strong> Array — <span style="color:#81C784">[{"sku":"...","name":"...","stock":10,"price":5.500}]</span>
+      </div>
+    </div>
+
+    <!-- EMAIL ALERTS -->
+    <div class="admin-sub" id="atab-email">
+      <div class="setup-card">
+        <h4>✉️ EMAIL ALERTS</h4>
+        <p style="font-size:12px;color:var(--g1);margin-bottom:14px;line-height:1.6;">Every new enquiry, availability check, and service booking instantly emails you. Free via EmailJS (200 emails/month).</p>
+        <div style="background:var(--d4);border-radius:var(--r);padding:12px;margin-bottom:14px;font-family:var(--fm);font-size:11px;color:var(--g1);line-height:1.9;">
+          <strong style="color:var(--white);">SETUP:</strong> 1. Sign up free at <a href="https://www.emailjs.com" target="_blank">emailjs.com</a> &nbsp;
+          2. Add Email Service → copy <strong style="color:var(--gold)">Service ID</strong> &nbsp;
+          3. Create Template with variables <code style="color:var(--gold)">{{ref}} {{type}} {{customer}} {{mobile}} {{vehicle}} {{items}} {{total}} {{notes}}</code> → copy <strong style="color:var(--gold)">Template ID</strong> &nbsp;
+          4. Account → copy <strong style="color:var(--gold)">Public Key</strong>
+        </div>
+        <label>PUBLIC KEY</label><input type="text" id="ej-pk" placeholder="user_aBcDeFgHiJk">
+        <label>SERVICE ID</label><input type="text" id="ej-sid" placeholder="service_xxxxxxx">
+        <label>TEMPLATE ID</label><input type="text" id="ej-tid" placeholder="template_xxxxxxx">
+        <label>YOUR EMAIL (receives all alerts)</label><input type="email" id="ej-to" placeholder="yourname@gmail.com">
+        <button class="save-cfg" onclick="saveEmail()">Save & Send Test</button>
+        <div id="cfg-st" style="font-family:var(--fm);font-size:11px;margin-top:8px;"></div>
+        <div class="cfg-note" style="margin-top:12px;">📋 All orders are permanently saved in localStorage regardless of email setup.<br>🔒 Credentials stored in this browser only.</div>
+      </div>
+    </div>
+
+    <!-- CHANGE PASSWORD -->
+    <div class="admin-sub" id="atab-password">
+      <div class="change-pwd-section">
+        <h4>🔑 CHANGE PASSWORD</h4>
+        <p style="font-size:12px;color:var(--g1);margin-bottom:16px;line-height:1.6;">Default password is <code style="color:var(--gold);font-family:var(--fm);">admin123</code> — change it immediately.</p>
+        <div class="fg"><label>Current Password</label><input type="password" id="pwd-current" placeholder="Current password"></div>
+        <div class="fg"><label>New Password (min 8 characters)</label><input type="password" id="pwd-new" placeholder="New password"></div>
+        <div class="fg"><label>Confirm New Password</label><input type="password" id="pwd-confirm" placeholder="Repeat new password"></div>
+        <button class="save-cfg" onclick="changePassword()">Update Password</button>
+        <div id="pwd-msg" style="font-family:var(--fm);font-size:11px;margin-top:8px;"></div>
+        <div style="background:var(--d4);border-radius:var(--r);padding:12px;margin-top:14px;font-family:var(--fm);font-size:11px;color:var(--g2);line-height:1.8;">🔒 Session expires after 2 hours &nbsp;·&nbsp; 🚫 5 failed attempts = 15 min lockout</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════
+// SPARE PARTS DATA
+// ═══════════════════════════════════════════
+let parts=[
+  {id:1,sku:'ENG-001',name:'Toyota Camry Oil Filter',cat:'Filters & Fluids',icon:'🔧',img:'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&q=80',brand:'Toyota',compat:'Camry 2018–2023',price:1.800,stock:45,min:10},
+  {id:2,sku:'BRK-012',name:'Brembo Front Brake Pads',cat:'Brakes & Suspension',icon:'⚙️',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',brand:'Brembo',compat:'Multi-brand',price:12.500,stock:8,min:10},
+  {id:3,sku:'ELE-034',name:'Bosch Alternator 90A',cat:'Electrical',icon:'⚡',img:'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&q=80',brand:'Bosch',compat:'Universal',price:38.000,stock:0,min:5},
+  {id:4,sku:'ENG-045',name:'NGK Spark Plugs Set of 4',cat:'Engine Parts',icon:'🔩',img:'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&q=80',brand:'NGK',compat:'Petrol Engines',price:6.200,stock:32,min:15},
+  {id:5,sku:'FLT-007',name:'Mann Air Filter Heavy Duty',cat:'Filters & Fluids',icon:'💨',img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80',brand:'Mann',compat:'SUVs & 4x4',price:4.500,stock:22,min:10},
+  {id:6,sku:'ENG-089',name:'Gates Timing Belt Kit',cat:'Engine Parts',icon:'🔗',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80',brand:'Gates',compat:'Toyota / Honda',price:22.000,stock:7,min:8},
+  {id:7,sku:'BDY-014',name:'LandCruiser Bumper Guard',cat:'Body & Exterior',icon:'🛡️',img:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80',brand:'Toyota',compat:'LandCruiser 200',price:45.000,stock:3,min:5},
+  {id:8,sku:'BRK-021',name:'Monroe Rear Shock Absorbers',cat:'Brakes & Suspension',icon:'🔧',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=400&q=80',brand:'Monroe',compat:'Sedan Universal',price:28.000,stock:5,min:6},
+  {id:9,sku:'ELE-055',name:'Amaron Car Battery 65Ah',cat:'Electrical',icon:'🔋',img:'https://images.unsplash.com/photo-1609692814858-cf3d07a0d1a8?w=400&q=80',brand:'Amaron',compat:'Universal',price:24.500,stock:18,min:10},
+  {id:10,sku:'CL-003',name:'Shell Radiator Coolant 5L',cat:'Cooling System',icon:'🌊',img:'https://images.unsplash.com/photo-1558979158-65a1eaa08691?w=400&q=80',brand:'Shell',compat:'All Vehicles',price:3.800,stock:40,min:15},
+  {id:11,sku:'EXH-008',name:'Stainless Exhaust Silencer',cat:'Exhaust System',icon:'💨',img:'https://images.unsplash.com/photo-1543465077-db45d34b88a5?w=400&q=80',brand:'Magneti Marelli',compat:'Small–Mid Cars',price:35.000,stock:4,min:5},
+  {id:12,sku:'BRK-030',name:'Brembo Front Disc Rotor Pair',cat:'Brakes & Suspension',icon:'⭕',img:'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=400&q=80',brand:'Brembo',compat:'Japanese Cars',price:18.000,stock:12,min:8},
+  {id:13,sku:'ELE-070',name:'Philips Xenon Bulb H4',cat:'Electrical',icon:'💡',img:'https://images.unsplash.com/photo-1558618047-f4e80c1f8e0a?w=400&q=80',brand:'Philips',compat:'Universal H4',price:11.000,stock:25,min:10},
+  {id:14,sku:'TRN-015',name:'Sachs Clutch Kit 3-Piece',cat:'Transmission',icon:'🔘',img:'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=400&q=80',brand:'Sachs',compat:'Manual Gearbox',price:55.000,stock:6,min:5},
+  {id:15,sku:'ENG-110',name:'Mobil 1 Engine Oil 5W-30 4L',cat:'Filters & Fluids',icon:'🛢️',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',brand:'Mobil',compat:'All Engines',price:9.200,stock:75,min:25},
+  {id:16,sku:'ENG-210',name:'AC Compressor – Toyota',cat:'Cooling System',icon:'❄️',img:'https://images.unsplash.com/photo-1558979158-65a1eaa08691?w=400&q=80',brand:'Denso',compat:'Toyota/Lexus',price:88.000,stock:2,min:3},
+];
+
+// ═══════════════════════════════════════════
+// OILS & FUELS DATA
+// ═══════════════════════════════════════════
+let oils=[
+  {id:101,sku:'PNT-R100',name:'Panta R100 Racing Fuel',cat:'Racing Fuel',icon:'⛽',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80',brand:'Panta',compat:'All racing engines',price:18.500,stock:40,min:10,dealer:true},
+  {id:102,sku:'PNT-GT98',name:'Panta GT98 High Performance',cat:'Racing Fuel',icon:'⛽',img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80',brand:'Panta',compat:'High-performance road cars',price:9.800,stock:60,min:15,dealer:true},
+  {id:103,sku:'PNT-EO5W40',name:'Panta Engine Oil 5W-40 4L',cat:'Engine Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1558618047-f4e80c1f8e0a?w=400&q=80',brand:'Panta',compat:'Petrol & Diesel',price:12.000,stock:35,min:10,dealer:true},
+  {id:104,sku:'PNT-EO10W60',name:'Panta Racing Oil 10W-60 4L',cat:'Engine Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80',brand:'Panta',compat:'Racing & Sport engines',price:22.000,stock:20,min:8,dealer:true},
+  {id:105,sku:'IGN-RACE',name:'Ignite Race Fuel 100 RON',cat:'Racing Fuel',icon:'🔥',img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&q=80',brand:'Ignite',compat:'Competition engines',price:24.000,stock:25,min:8,dealer:true},
+  {id:106,sku:'IGN-98RON',name:'Ignite 98 RON Street Fuel',cat:'Racing Fuel',icon:'🔥',img:'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&q=80',brand:'Ignite',compat:'High-performance road cars',price:11.500,stock:50,min:15,dealer:true},
+  {id:107,sku:'IGN-EO0W20',name:'Ignite Full Synthetic 0W-20 5L',cat:'Engine Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&q=80',brand:'Ignite',compat:'Modern petrol engines',price:19.000,stock:18,min:8,dealer:true},
+  {id:108,sku:'CST-EDGE5W30',name:'Castrol EDGE 5W-30 4L',cat:'Engine Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80',brand:'Castrol',compat:'All petrol engines',price:10.500,stock:45,min:12,dealer:false},
+  {id:109,sku:'CST-ATF',name:'Castrol ATF Fluid 4L',cat:'Gear Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&q=80',brand:'Castrol',compat:'Automatic gearbox',price:8.750,stock:30,min:10,dealer:false},
+  {id:110,sku:'MTL-300V',name:'Motul 300V Competition 5W-40',cat:'Engine Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=400&q=80',brand:'Motul',compat:'Racing & sport engines',price:28.000,stock:12,min:5,dealer:false},
+  {id:111,sku:'MTL-GEAR',name:'Motul Gear 300 75W-90 2L',cat:'Gear Oil',icon:'🛢️',img:'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=400&q=80',brand:'Motul',compat:'Manual gearbox / diff',price:14.500,stock:8,min:5,dealer:false},
+  {id:112,sku:'CST-BF',name:'Castrol React Brake Fluid DOT4',cat:'Brake Fluid',icon:'🟡',img:'https://images.unsplash.com/photo-1609692814858-cf3d07a0d1a8?w=400&q=80',brand:'Castrol',compat:'All vehicles',price:3.200,stock:60,min:15,dealer:false},
+  {id:113,sku:'MTL-COOL',name:'Motul Inugel Optimal 2L',cat:'Coolant',icon:'🌊',img:'https://images.unsplash.com/photo-1558979158-65a1eaa08691?w=400&q=80',brand:'Motul',compat:'All vehicles',price:6.500,stock:22,min:8,dealer:false},
+  {id:114,sku:'PNT-GO75W90',name:'Panta Gear Oil 75W-90 2L',cat:'Gear Oil',icon:'⚙️',img:'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=400&q=80',brand:'Panta',compat:'Manual gearbox',price:11.000,stock:0,min:5,dealer:true},
+];
+
+// ═══════════════════════════════════════════
+// WORKSHOP SERVICES DATA
+// ═══════════════════════════════════════════
+const workshopServices=[
+  {icon:'🛞',name:'Tyre Service',cat:'Tyres',desc:'Tyre fitting, balancing, rotation and puncture repair for all vehicle types including SUVs and 4x4.',tags:['Fitting','Balancing','Rotation','Puncture Repair','Run-Flat'],price:'From BD 5',time:'30 – 60 mins'},
+  {icon:'📐',name:'Wheel Alignment',cat:'Tyres',desc:'4-wheel computerised alignment using Hunter technology. Corrects steering pull, uneven wear and improves fuel economy.',tags:['4-Wheel','Hunter Tech','Camber','Caster','Toe-In'],price:'From BD 8',time:'45 mins'},
+  {icon:'⚡',name:'Performance Tuning',cat:'Tuning',desc:'ECU remapping, dyno tuning and performance upgrades. Panta and Ignite fuels optimised for maximum horsepower gains.',tags:['ECU Remap','Dyno Tuning','Boost Control','Fuel Mapping','Air Intake'],price:'From BD 50',time:'2 – 4 hours'},
+  {icon:'🏎️',name:'Track Preparation',cat:'Tuning',desc:'Full track-day preparation including brake bleed, tyre pressures, suspension setup and safety checks.',tags:['Brake Bleed','Suspension Setup','Safety Check','Tyre Pressure','Fluid Top-up'],price:'From BD 35',time:'2 – 3 hours'},
+  {icon:'🔧',name:'Suspension & Lowering',cat:'Suspension',desc:'Coilover installation, spring replacement, shock absorber replacement and geometry setup.',tags:['Coilovers','Springs','Shocks','Geometry','Ride Height'],price:'From BD 25',time:'2 – 4 hours'},
+  {icon:'🏗️',name:'Lift Kit Installation',cat:'Suspension',desc:'4x4 and SUV lift kits installed with full alignment and geometry check. Off-road specialist.',tags:['4x4 Lift','SUV Lift','Alignment','Diff Drop','Off-Road'],price:'From BD 80',time:'3 – 5 hours'},
+  {icon:'🛡️',name:'Brake Service',cat:'Brakes',desc:'Pad & disc replacement, brake fluid flush, caliper overhaul, handbrake adjustment.',tags:['Pads','Discs','Fluid Flush','Calipers','Handbrake'],price:'From BD 12',time:'1 – 2 hours'},
+  {icon:'🔴',name:'High-Performance Brakes',cat:'Brakes',desc:'Brembo, EBC and Ferodo performance brake kits fitted and bedded in. Ideal for track use.',tags:['Brembo','EBC','Ferodo','Bedding-In','Track Spec'],price:'From BD 40',time:'2 hours'},
+  {icon:'🔋',name:'Battery & Electrical',cat:'Electrical',desc:'Battery health test, replacement, ECU scan, wiring fault diagnosis and sensor replacement.',tags:['Battery','ECU Scan','Wiring','Sensors','Alternator'],price:'From BD 5',time:'30 – 60 mins'},
+  {icon:'❄️',name:'AC Service',cat:'AC',desc:'Gas recharge, leak detection, compressor check, cabin filter and evaporator clean. Essential for Bahrain.',tags:['Gas Recharge','Leak Check','Compressor','Cabin Filter','Evaporator'],price:'From BD 15',time:'1 – 2 hours'},
+  {icon:'🔩',name:'Full Service',cat:'Service',desc:'Complete vehicle inspection, oil & filter change, all fluid top-ups, tyre rotation and 50-point check.',tags:['Oil Change','Filters','Fluid Check','50-Point Inspection','Tyre Rotation'],price:'From BD 25',time:'2 – 3 hours'},
+  {icon:'🚿',name:'Engine & Bay Detail',cat:'Service',desc:'Engine bay degreasing, steam clean and dress. Makes your engine room look showroom-ready.',tags:['Degrease','Steam Clean','Engine Dress','Bay Wash'],price:'From BD 18',time:'1 – 2 hours'},
+];
+const wsCategories=['All','Tyres','Tuning','Suspension','Brakes','Electrical','AC','Service'];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let cart=JSON.parse(localStorage.getItem('ap-cart')||'[]');
+let orders=JSON.parse(localStorage.getItem('ap-orders')||'[]');
+let emailCfg=JSON.parse(localStorage.getItem('ap-ecfg')||'{}');
+let partsSortAsc=true,oilsSortAsc=true;
+let filteredParts=[...parts],filteredOils=[...oils];
+let pendingUpload=null;
+let capAns=0,avCapAns=0,svcCapAns=0;
+let currentSvcName='',availPartId=null,wsFilter='All';
+
+// Rate limiting
+const RATE_LIMIT=3;
+function getRateData(){return JSON.parse(localStorage.getItem('ap-rate')||'{"c":0,"r":0}');}
+function isRateLimited(){const d=getRateData();if(Date.now()>d.r){localStorage.setItem('ap-rate',JSON.stringify({c:0,r:Date.now()+3600000}));return false;}return d.c>=RATE_LIMIT;}
+function bumpRate(){const d=getRateData();d.c++;if(!d.r)d.r=Date.now()+3600000;localStorage.setItem('ap-rate',JSON.stringify(d));}
+
+// ═══════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════
+const bd=n=>'BD '+Number(n).toFixed(3);
+const ss=p=>p.stock===0?{label:'Out of Stock',cls:'s-out',key:'out'}:p.stock<p.min?{label:'Low: '+p.stock+' left',cls:'s-low',key:'low'}:{label:'In Stock',cls:'s-in',key:'in'};
+function showToast(m,d=2800){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),d);}
+function saveCart(){localStorage.setItem('ap-cart',JSON.stringify(cart));}
+function saveOrders(){localStorage.setItem('ap-orders',JSON.stringify(orders));}
+function dl(href,fn){const a=document.createElement('a');a.href=href;a.download=fn;a.click();}
+function today(){return new Date().toISOString().slice(0,10);}
+function mkImg(p,h){
+  if(p.img)return`<img src="${p.img}" alt="${p.name}" style="width:100%;height:${h}px;object-fit:cover;" onerror="this.style.display='none';this.nextSibling&&(this.nextSibling.style.display='flex')"><div style="display:none;width:100%;height:${h}px;align-items:center;justify-content:center;font-size:${h>200?64:46}px;">${p.icon}</div>`;
+  return`<div style="width:100%;height:${h}px;display:flex;align-items:center;justify-content:center;font-size:${h>200?64:46}px;background:linear-gradient(135deg,var(--d3),var(--d4));">${p.icon}</div>`;
+}
+
+// ═══════════════════════════════════════════
+// CAPTCHA
+// ═══════════════════════════════════════════
+function makeCap(qId,inpId,stId){
+  const ops=['+','-','×'];const op=ops[Math.floor(Math.random()*3)];
+  let a=Math.floor(Math.random()*12)+1,b=Math.floor(Math.random()*12)+1,ans;
+  if(op==='-'){if(b>a)[a,b]=[b,a];ans=a-b;}else if(op==='×')ans=a*b;else ans=a+b;
+  const el=document.getElementById(qId);if(el)el.textContent=`${a} ${op} ${b}`;
+  const inp=document.getElementById(inpId);if(inp)inp.value='';
+  const st=document.getElementById(stId);if(st)st.textContent='';
+  return ans;
+}
+function genCap(){capAns=makeCap('cap-q','cap-a','cap-st');}
+function checkCap(){const v=parseInt(document.getElementById('cap-a').value);const st=document.getElementById('cap-st');if(isNaN(v)){st.textContent='';return false;}if(v===capAns){st.className='cap-st cap-ok';st.textContent='✓ Correct';return true;}st.className='cap-st cap-err';st.textContent='✗ Try again';return false;}
+function genAvCap(){avCapAns=makeCap('av-cap-q','av-cap-a','av-cap-st');}
+function checkAvCap(){const v=parseInt(document.getElementById('av-cap-a').value);const st=document.getElementById('av-cap-st');if(isNaN(v)){st.textContent='';return false;}if(v===avCapAns){st.className='cap-st cap-ok';st.textContent='✓';return true;}st.className='cap-st cap-err';st.textContent='✗';return false;}
+function genSvcCap(){svcCapAns=makeCap('svc-cap-q','svc-cap-a','svc-cap-st');}
+function checkSvcCap(){const v=parseInt(document.getElementById('svc-cap-a').value);const st=document.getElementById('svc-cap-st');if(isNaN(v)){st.textContent='';return false;}if(v===svcCapAns){st.className='cap-st cap-ok';st.textContent='✓';return true;}st.className='cap-st cap-err';st.textContent='✗';return false;}
+
+// ═══════════════════════════════════════════
+// MOBILE MENU
+// ═══════════════════════════════════════════
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+function closeMenu(){document.getElementById('mobile-menu').classList.remove('open');}
+
+// ═══════════════════════════════════════════
+// MODAL HELPERS
+// ═══════════════════════════════════════════
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+document.getElementById('prod-modal-ov').addEventListener('click',function(e){if(e.target===this)closeModal('prod-modal-ov');});
+document.getElementById('avail-ov').addEventListener('click',function(e){if(e.target===this)closeModal('avail-ov');});
+document.getElementById('svc-modal-ov').addEventListener('click',function(e){if(e.target===this)closeModal('svc-modal-ov');});
+
+// ═══════════════════════════════════════════
+// PAGES
+// ═══════════════════════════════════════════
+const navMap={home:0,parts:1,oils:2,workshop:3,enquiry:4};
+function gPage(name){
+  if(name==='admin'&&!isAdminLoggedIn()){requireAdmin();return;}
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('page-'+name).classList.add('on');
+  document.querySelectorAll('.nl').forEach((l,i)=>l.classList.toggle('on',i===navMap[name]));
+  window.scrollTo(0,0);
+  if(name==='parts')filterParts();
+  if(name==='oils'){renderOilsBrandPills();filterOils();}
+  if(name==='workshop')renderWorkshop('All');
+  if(name==='admin'){renderAdminStats();renderOrders();renderPartsInv();loadEmailCfg();}
+  if(name==='enquiry'){document.getElementById('enq-ok').style.display='none';document.getElementById('enq-form-wrap').style.display='block';renderEnqItems();genCap();}
+}
+
+// ═══════════════════════════════════════════
+// RENDER PRODUCT CARD (shared for parts & oils)
+// ═══════════════════════════════════════════
+function renderCard(p,container,type){
+  const st=ss(p);
+  const d=document.createElement('div');d.className='pc';
+  const actionBtn=st.key==='out'
+    ?`<button class="btn-avail" onclick="openAvailModal(${p.id},'${type}')">🔔 Check Avail.</button>`
+    :`<button class="btn-add" onclick="addCart(${p.id},'${type}')">+ Add to List</button>`;
+  d.innerHTML=`
+    <div class="pc-img-wrap" onclick="openProdModal(${p.id},'${type}')">${mkImg(p,185)}<span class="stag ${st.cls}">${st.label}</span>${p.dealer?'<span class="dealer-badge">★ DEALER</span>':''}</div>
+    <div class="pc-body">
+      <div class="pc-cat">${p.brand}${p.dealer?' · Authorised Dealer':''}</div>
+      <div class="pc-name">${p.name}</div>
+      <div class="pc-sku">SKU: ${p.sku}</div>
+      <div class="pc-meta">
+        <div class="pc-row"><span class="pc-lbl">Category</span><span class="pc-val">${p.cat}</span></div>
+        <div class="pc-row"><span class="pc-lbl">Fits / Use</span><span class="pc-val">${p.compat}</span></div>
+      </div>
+      <div class="pc-foot"><div class="pc-price">${bd(p.price)}</div>${actionBtn}</div>
+    </div>`;
+  container.appendChild(d);
+}
+
+// ═══════════════════════════════════════════
+// FEATURED GRIDS (Home page)
+// ═══════════════════════════════════════════
+function renderFeatured(){
+  const pg=document.getElementById('feat-parts-grid');pg.innerHTML='';
+  parts.slice(0,4).forEach(p=>renderCard(p,pg,'parts'));
+  const og=document.getElementById('feat-oils-grid');og.innerHTML='';
+  oils.filter(o=>o.dealer).slice(0,4).forEach(p=>renderCard(p,og,'oils'));
+  const t=parts.reduce((a,p)=>a+p.stock,0);
+  ['h-stock','h-stat'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=t;});
+}
+
+// ═══════════════════════════════════════════
+// PARTS PAGE
+// ═══════════════════════════════════════════
+function filterParts(){
+  const q=(document.getElementById('parts-search').value||'').toLowerCase();
+  const cat=document.getElementById('parts-cat').value;
+  const stk=document.getElementById('parts-stk').value;
+  filteredParts=parts.filter(p=>{
+    const mq=!q||p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q);
+    return mq&&(!cat||p.cat===cat)&&(!stk||ss(p).key===stk);
+  });
+  filteredParts.sort((a,b)=>partsSortAsc?a.price-b.price:b.price-a.price);
+  const g=document.getElementById('parts-grid');g.innerHTML='';
+  document.getElementById('parts-res-info').textContent=`Showing ${filteredParts.length} of ${parts.length} parts`;
+  document.getElementById('parts-no-res').style.display=filteredParts.length?'none':'block';
+  filteredParts.forEach(p=>renderCard(p,g,'parts'));
+}
+function togglePartsSort(){partsSortAsc=!partsSortAsc;document.getElementById('parts-sort-btn').textContent='Price '+(partsSortAsc?'↑':'↓');filterParts();}
+
+// ═══════════════════════════════════════════
+// OILS PAGE
+// ═══════════════════════════════════════════
+const oilBrands=['All','Panta','Ignite','Castrol','Motul'];
+function renderOilsBrandPills(){
+  document.getElementById('oils-brand-pills').innerHTML=oilBrands.map(b=>`<button class="brand-pill${b==='All'?' on':''}${(b==='Panta'||b==='Ignite')?' dealer':''}" onclick="filterOilsByBrand('${b}',this)">${b}</button>`).join('');
+}
+let currentOilBrand='All';
+function filterOilsByBrand(brand,el){
+  currentOilBrand=brand;
+  document.querySelectorAll('.brand-pill').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  filterOils();
+}
+function filterOils(){
+  const q=(document.getElementById('oils-search').value||'').toLowerCase();
+  const cat=document.getElementById('oils-cat').value;
+  filteredOils=oils.filter(p=>{
+    const mq=!q||p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q);
+    const mb=currentOilBrand==='All'||p.brand===currentOilBrand;
+    return mq&&mb&&(!cat||p.cat===cat);
+  });
+  filteredOils.sort((a,b)=>oilsSortAsc?a.price-b.price:b.price-a.price);
+  const g=document.getElementById('oils-grid');g.innerHTML='';
+  document.getElementById('oils-res-info').textContent=`Showing ${filteredOils.length} of ${oils.length} products`;
+  document.getElementById('oils-no-res').style.display=filteredOils.length?'none':'block';
+  filteredOils.forEach(p=>renderCard(p,g,'oils'));
+}
+function toggleOilsSort(){oilsSortAsc=!oilsSortAsc;document.getElementById('oils-sort-btn').textContent='Price '+(oilsSortAsc?'↑':'↓');filterOils();}
+
+// ═══════════════════════════════════════════
+// WORKSHOP PAGE
+// ═══════════════════════════════════════════
+function renderWorkshop(filterCat){
+  wsFilter=filterCat;
+  const btns=document.getElementById('ws-cat-btns');
+  btns.innerHTML=wsCategories.map(c=>`<button class="ws-cat${c===wsFilter?' on':''}" onclick="renderWorkshop('${c}')">${c}</button>`).join('');
+  const filtered=filterCat==='All'?workshopServices:workshopServices.filter(s=>s.cat===filterCat);
+  const g=document.getElementById('workshop-grid');g.innerHTML='';
+  const fg=document.getElementById('feat-svc-grid');
+  filtered.forEach(s=>{
+    const card=document.createElement('div');card.className='svc-card';
+    card.innerHTML=`
+      <div class="svc-card-top">
+        <div class="svc-icon-wrap">${s.icon}</div>
+        <h3>${s.name}</h3>
+        <p>${s.desc}</p>
+        <div class="svc-tags">${s.tags.map(t=>`<span class="svc-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="svc-card-foot">
+        <div><div class="svc-price">${s.price}</div><div class="svc-time">⏱ ${s.time}</div></div>
+        <button class="btn-book" onclick="openSvcModal('${s.name}')">Book Now →</button>
+      </div>`;
+    g.appendChild(card);
+  });
+  // Featured on home — show first 3
+  if(fg){fg.innerHTML='';workshopServices.slice(0,3).forEach(s=>{const c=document.createElement('div');c.className='svc-card';c.innerHTML=`<div class="svc-card-top"><div class="svc-icon-wrap">${s.icon}</div><h3>${s.name}</h3><p>${s.desc}</p></div><div class="svc-card-foot"><div><div class="svc-price">${s.price}</div><div class="svc-time">⏱ ${s.time}</div></div><button class="btn-book" onclick="openSvcModal('${s.name}')">Book Now →</button></div>`;fg.appendChild(c);});}
+}
+
+// ═══════════════════════════════════════════
+// PRODUCT MODAL
+// ═══════════════════════════════════════════
+function openProdModal(id,type){
+  const p=(type==='oils'?oils:parts).find(x=>x.id===id);const st=ss(p);
+  const btn=st.key==='out'
+    ?`<button class="btn-avail" style="padding:10px 18px;font-size:13px;" onclick="openAvailModal(${id},'${type}');closeModal('prod-modal-ov')">🔔 Check Availability</button>`
+    :`<button class="btn-add" style="padding:10px 22px;font-size:13px;" onclick="addCart(${id},'${type}');closeModal('prod-modal-ov')">+ Add to Enquiry List</button>`;
+  document.getElementById('prod-modal-body').innerHTML=`
+    <div class="pm-img">${mkImg(p,250)}<button class="pm-close" onclick="closeModal('prod-modal-ov')">✕</button>${p.dealer?'<span class="dealer-badge" style="position:absolute;bottom:12px;left:12px;font-size:11px;">★ Authorised Dealer</span>':''}</div>
+    <div class="pm-body">
+      <div class="pm-cat">${p.brand}${p.dealer?' · AUTHORISED DEALER':''} · ${p.cat}</div>
+      <h3>${p.name}</h3>
+      <div class="pm-specs">
+        <div class="pm-spec"><div class="pm-sl">SKU</div><div class="pm-sv" style="font-family:var(--fm)">${p.sku}</div></div>
+        <div class="pm-spec"><div class="pm-sl">Brand</div><div class="pm-sv">${p.brand}</div></div>
+        <div class="pm-spec"><div class="pm-sl">Compatibility / Use</div><div class="pm-sv">${p.compat}</div></div>
+        <div class="pm-spec"><div class="pm-sl">Stock</div><div class="pm-sv"><span class="stag ${st.cls}" style="position:static;">${st.label}</span></div></div>
+      </div>
+      <div class="pm-foot"><div class="pm-price">${bd(p.price)}</div>${btn}</div>
+    </div>`;
+  document.getElementById('prod-modal-ov').classList.add('on');
+}
+
+// ═══════════════════════════════════════════
+// AVAILABILITY MODAL
+// ═══════════════════════════════════════════
+function openAvailModal(id,type){
+  availPartId={id,type};
+  const p=(type==='oils'?oils:parts).find(x=>x.id===id);
+  document.getElementById('av-part-info').textContent=`${p.name} (${p.sku}) — currently out of stock`;
+  ['av-name','av-mobile','av-vehicle','av-notes','av-hp'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+  genAvCap();document.getElementById('avail-ov').classList.add('on');
+}
+function submitAvailEnq(){
+  if(document.getElementById('av-hp').value){showToast('Blocked.');return;}
+  const name=document.getElementById('av-name').value.trim();
+  const mobile=document.getElementById('av-mobile').value.trim();
+  if(!name||!mobile){showToast('Please enter name and mobile');return;}
+  if(!checkAvCap()){showToast('Please answer the verification question');return;}
+  if(isRateLimited()){showToast('Too many requests. Please wait.');return;}
+  const {id,type}=availPartId;
+  const p=(type==='oils'?oils:parts).find(x=>x.id===id);
+  const ref='AV-'+Date.now().toString().slice(-6);
+  const order={ref,type:'availability',date:new Date().toISOString(),fname:name,lname:'',mobile,email:'',vehicle:document.getElementById('av-vehicle').value,contact:'Phone',notes:`Query: ${document.getElementById('av-query').value}. ${document.getElementById('av-notes').value}`,items:[{id:p.id,sku:p.sku,name:p.name,qty:1,price:p.price,icon:p.icon,outOfStock:true}],total:0,status:'new'};
+  orders.unshift(order);saveOrders();bumpRate();sendEmail(order);
+  closeModal('avail-ov');showToast('✓ Availability request sent! We will contact you shortly.',4000);renderAdminStats();
+}
+
+// ═══════════════════════════════════════════
+// SERVICE BOOKING MODAL
+// ═══════════════════════════════════════════
+function openSvcModal(name){
+  currentSvcName=name;
+  document.getElementById('svc-modal-tag').textContent=`Service: ${name}`;
+  ['svc-name','svc-mobile','svc-vehicle','svc-notes','svc-hp'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+  document.getElementById('svc-date').value='';
+  genSvcCap();document.getElementById('svc-modal-ov').classList.add('on');
+}
+function submitSvcBooking(){
+  if(document.getElementById('svc-hp').value){showToast('Blocked.');return;}
+  const name=document.getElementById('svc-name').value.trim();
+  const mobile=document.getElementById('svc-mobile').value.trim();
+  if(!name||!mobile){showToast('Please enter name and mobile');return;}
+  if(!checkSvcCap()){showToast('Please answer the verification question');return;}
+  if(isRateLimited()){showToast('Too many requests. Please wait.');return;}
+  const ref='SB-'+Date.now().toString().slice(-6);
+  const order={ref,type:'service',date:new Date().toISOString(),fname:name,lname:'',mobile,email:'',vehicle:document.getElementById('svc-vehicle').value,contact:'Phone',notes:`Service: ${currentSvcName}. Date: ${document.getElementById('svc-date').value||'Flexible'}. Time: ${document.getElementById('svc-time').value}. Notes: ${document.getElementById('svc-notes').value}`,items:[{id:0,sku:'SVC',name:currentSvcName,qty:1,price:0,icon:'🔧',outOfStock:false}],total:0,status:'new'};
+  orders.unshift(order);saveOrders();bumpRate();sendEmail(order);
+  closeModal('svc-modal-ov');showToast(`✓ Booking for "${currentSvcName}" sent! We'll call to confirm.`,4500);renderAdminStats();
+}
+
+// ═══════════════════════════════════════════
+// CART
+// ═══════════════════════════════════════════
+function addCart(id,type){
+  const p=(type==='oils'?oils:parts).find(x=>x.id===id);
+  if(p.stock===0){openAvailModal(id,type);return;}
+  const ex=cart.find(x=>x.id===id&&x.type===type);
+  if(ex){if(ex.qty<p.stock)ex.qty++;else{showToast('Max stock added');return;}}
+  else cart.push({id:p.id,type,sku:p.sku,name:p.name,icon:p.icon,brand:p.brand,price:p.price,stock:p.stock,qty:1});
+  saveCart();updateCartUI();showToast('✓ '+p.name+' added to enquiry list');
+}
+function updateCartUI(){
+  const cnt=cart.reduce((a,i)=>a+i.qty,0);
+  document.getElementById('cart-cnt').textContent=cnt;
+  const list=document.getElementById('cart-list');
+  list.innerHTML=!cart.length
+    ?'<div class="empty-cart"><div class="ec-icon">🛒</div>Your enquiry list is empty.<br>Add parts, oils or fuel to get started.</div>'
+    :cart.map(i=>`<div class="ci">
+        <div class="ci-ph">${i.icon}</div>
+        <div class="ci-info">
+          <div class="ci-name">${i.name}</div>
+          <div class="ci-sku">${i.sku} · ${i.brand}</div>
+          <div class="ci-ctrl">
+            <button class="qb" onclick="chgQty(${i.id},'${i.type}',-1)">−</button>
+            <span class="qn">${i.qty}</span>
+            <button class="qb" onclick="chgQty(${i.id},'${i.type}',1)">+</button>
+            <button class="rm-btn" onclick="rmItem(${i.id},'${i.type}')">🗑</button>
+          </div>
+        </div>
+        <div class="ci-price">${bd(i.price*i.qty)}</div>
+      </div>`).join('');
+  const sub=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  document.getElementById('cart-sub').textContent=bd(sub);
+  document.getElementById('cart-total').textContent=bd(sub);
+}
+function chgQty(id,type,d){const i=cart.find(x=>x.id===id&&x.type===type);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>!(x.id===id&&x.type===type));if(i.qty>i.stock)i.qty=i.stock;saveCart();updateCartUI();}
+function rmItem(id,type){cart=cart.filter(x=>!(x.id===id&&x.type===type));saveCart();updateCartUI();}
+function toggleCart(){document.getElementById('cart-ov').classList.toggle('on');document.getElementById('cart-side').classList.toggle('on');}
+function gotoEnq(){toggleCart();gPage('enquiry');}
+
+// ═══════════════════════════════════════════
+// ENQUIRY FORM
+// ═══════════════════════════════════════════
+function renderEnqItems(){
+  const body=document.getElementById('enq-items-body');
+  if(!cart.length){body.innerHTML='<div class="ois-empty">No items yet. <button class="btn-add" style="font-size:12px;padding:5px 12px;" onclick="gPage(\'parts\')">Browse Parts</button></div>';return;}
+  const sub=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  body.innerHTML=cart.map(i=>`<div class="ois-row"><div class="ois-ph">${i.icon}</div><div class="ois-name">${i.name}<br><span style="font-family:var(--fm);font-size:10px;color:var(--g2)">${i.sku} · ${i.type==='oils'?'Oil/Fuel':'Spare Part'}</span></div><div class="ois-qty">× ${i.qty}</div><div class="ois-price">${bd(i.price*i.qty)}</div></div>`).join('')+`<div class="total-line"><span>Estimated Total</span><span>${bd(sub)}</span></div><p style="font-size:10px;color:var(--g2);margin-top:5px;font-family:var(--fm);">// Final price confirmed by our team after availability check</p>`;
+}
+function submitEnq(){
+  if(document.getElementById('e-hp').value){showToast('Blocked.');return;}
+  if(isRateLimited()){document.getElementById('rate-warn').style.display='block';showToast('Too many submissions. Please wait.');return;}
+  document.getElementById('rate-warn').style.display='none';
+  if(!checkCap()){showToast('Please answer the verification question correctly');return;}
+  const fname=document.getElementById('e-fname').value.trim();
+  const mobile=document.getElementById('e-mobile').value.trim();
+  if(!fname){showToast('Please enter your name');return;}
+  if(!mobile){showToast('Please enter your mobile number');return;}
+  if(!cart.length){showToast('Your enquiry list is empty');return;}
+  const btn=document.getElementById('sub-btn');btn.disabled=true;btn.textContent='Sending…';
+  const ref='AP-'+Date.now().toString().slice(-6);
+  const order={ref,type:'order',date:new Date().toISOString(),fname,lname:document.getElementById('e-lname').value,mobile,email:document.getElementById('e-email').value,vehicle:document.getElementById('e-vehicle').value,contact:document.getElementById('e-contact').value,notes:document.getElementById('e-notes').value,items:cart.map(i=>({id:i.id,sku:i.sku,name:i.name,qty:i.qty,price:i.price,icon:i.icon,type:i.type})),total:cart.reduce((a,i)=>a+i.price*i.qty,0),status:'new'};
+  orders.unshift(order);saveOrders();bumpRate();sendEmail(order);
+  cart=[];saveCart();updateCartUI();
+  document.getElementById('enq-ref').textContent='Reference: #'+ref;
+  document.getElementById('enq-form-wrap').style.display='none';
+  document.getElementById('enq-ok').style.display='block';
+  btn.disabled=false;btn.textContent='SEND ENQUIRY REQUEST';
+  genCap();
+}
+function resetEnq(){document.getElementById('enq-form-wrap').style.display='block';document.getElementById('enq-ok').style.display='none';['e-fname','e-lname','e-mobile','e-email','e-vehicle','e-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});gPage('parts');}
+
+// ═══════════════════════════════════════════
+// EMAIL
+// ═══════════════════════════════════════════
+function sendEmail(order){
+  if(!emailCfg.pk||!emailCfg.sid||!emailCfg.tid)return;
+  emailjs.init(emailCfg.pk);
+  const tl={order:'ORDER ENQUIRY',availability:'AVAILABILITY CHECK',service:'SERVICE BOOKING'};
+  emailjs.send(emailCfg.sid,emailCfg.tid,{ref:order.ref,type:tl[order.type]||'ENQUIRY',customer:`${order.fname} ${order.lname||''}`.trim(),mobile:order.mobile,email:order.email||'—',vehicle:order.vehicle||'—',items:order.items.map(i=>`${i.name} (${i.sku}) × ${i.qty}${order.type==='order'?' = '+bd(i.price*i.qty):''}`).join('\n'),total:order.type==='order'?bd(order.total):'TBD',notes:order.notes||'—',to_email:emailCfg.to}).catch(e=>console.warn('Email error:',e));
+}
+
+// ═══════════════════════════════════════════
+// ADMIN
+// ═══════════════════════════════════════════
+function renderAdminStats(){
+  document.getElementById('ad-stock').textContent=parts.reduce((a,p)=>a+p.stock,0)+oils.reduce((a,p)=>a+p.stock,0);
+  document.getElementById('ad-low').textContent=[...parts,...oils].filter(p=>p.stock>0&&p.stock<p.min).length;
+  document.getElementById('ad-orders').textContent=orders.length;
+  document.getElementById('ad-new').textContent=orders.filter(o=>o.status==='new').length;
+}
+const SLBLS={new:'New',availability:'Avail.',service:'Service',contacted:'Contacted',confirmed:'Confirmed',completed:'Completed'};
+const SCLS={new:'sb-new',availability:'sb-avail',service:'sb-svc',contacted:'sb-cont',confirmed:'sb-conf',completed:'sb-done'};
+const TTYPE={order:'ORDER',availability:'AVAIL',service:'SERVICE'};
+function renderOrders(){
+  orders=JSON.parse(localStorage.getItem('ap-orders')||'[]');
+  const q=(document.getElementById('o-search').value||'').toLowerCase();
+  const sf=document.getElementById('o-sf').value;
+  const rows=orders.filter(o=>{const mq=!q||(o.fname+' '+o.lname).toLowerCase().includes(q)||o.ref.toLowerCase().includes(q)||o.mobile.includes(q);return mq&&(!sf||o.type===sf);});
+  document.getElementById('no-orders').style.display=rows.length?'none':'block';
+  document.getElementById('o-tbody').innerHTML=rows.map(o=>{
+    const dt=new Date(o.date);
+    return`<tr>
+      <td style="font-family:var(--fm);font-size:11px;color:var(--gold)">${o.ref}</td>
+      <td><span class="sb ${{order:'sb-conf',availability:'sb-avail',service:'sb-svc'}[o.type]||'sb-new'}">${TTYPE[o.type]||o.type}</span></td>
+      <td style="font-family:var(--fm);font-size:10px;white-space:nowrap">${dt.toLocaleDateString('en-BH',{day:'2-digit',month:'short',year:'numeric'})}<br>${dt.toLocaleTimeString('en-BH',{hour:'2-digit',minute:'2-digit'})}</td>
+      <td style="font-weight:600;font-size:12px">${o.fname} ${o.lname||''}<br><span style="font-size:10px;color:var(--g2)">${o.email||''}</span></td>
+      <td style="font-family:var(--fm);font-size:11px;white-space:nowrap">${o.mobile}</td>
+      <td style="font-size:11px;color:var(--g1)">${o.vehicle||'—'}</td>
+      <td style="font-size:11px;color:var(--g1);line-height:1.7">${o.items.map(i=>`${i.name} × ${i.qty}`).join('<br>')}${o.notes?`<br><span style="color:var(--g2);font-size:10px">${o.notes.slice(0,60)}${o.notes.length>60?'…':''}</span>`:''}</td>
+      <td style="font-family:var(--ff);font-size:15px;white-space:nowrap;color:var(--gold)">${o.type==='order'?bd(o.total):'TBD'}</td>
+      <td>
+        <span class="sb ${SCLS[o.status]||'sb-new'}">${SLBLS[o.status]||o.status}</span><br>
+        <select class="ssel" onchange="updOrder('${o.ref}',this.value)">
+          <option value="new" ${o.status==='new'?'selected':''}>New</option>
+          <option value="contacted" ${o.status==='contacted'?'selected':''}>Contacted</option>
+          <option value="confirmed" ${o.status==='confirmed'?'selected':''}>Confirmed</option>
+          <option value="completed" ${o.status==='completed'?'selected':''}>Completed</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+}
+function updOrder(ref,status){const o=orders.find(x=>x.ref===ref);if(o){o.status=status;saveOrders();renderOrders();renderAdminStats();showToast('✓ '+ref+' → '+SLBLS[status]);}}
+function clearCompleted(){if(!orders.some(o=>o.status==='completed')){showToast('No completed orders to clear');return;}if(!confirm('Remove all Completed orders?'))return;orders=orders.filter(o=>o.status!=='completed');saveOrders();renderOrders();renderAdminStats();showToast('✓ Cleared');}
+function exportOrders(){const rows=['Ref,Type,Date,Name,Mobile,Email,Vehicle,Items,Total BD,Status'];orders.forEach(o=>rows.push(`${o.ref},${o.type},${new Date(o.date).toLocaleDateString()},"${o.fname} ${o.lname||''}",${o.mobile},${o.email||''},"${o.vehicle||''}","${o.items.map(i=>i.name+' x'+i.qty).join(' | ')}",${o.total.toFixed(3)},${o.status}`));dl('data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')),'autopro-orders-'+today()+'.csv');showToast('✓ Exported');}
+
+function mkInvRow(p,type,extraCols=''){
+  const st=ss(p);const stC={in:'#81C784',low:'#FCD34D',out:'#F87171'};
+  const thumb=p.img?`<img src="${p.img}" class="inv-thumb" onerror="this.style.display='none';">`:`<div class="inv-ph">${p.icon}</div>`;
+  return`<tr>
+    <td>${thumb}</td>
+    <td style="font-family:var(--fm);font-size:10px">${p.sku}</td>
+    <td style="font-weight:500;font-size:12px">${p.name}</td>
+    ${extraCols}
+    <td style="color:var(--g2);font-size:11px">${p.cat}</td>
+    <td><input class="ep" type="number" step="0.001" min="0" id="pr-${type}-${p.id}" value="${p.price.toFixed(3)}"></td>
+    <td style="color:${stC[st.key]};font-family:var(--fm)">${p.stock}</td>
+    <td><input class="eq" type="number" min="0" id="qty-${type}-${p.id}" value="${p.stock}"></td>
+    <td><input class="ei" type="text" id="img-${type}-${p.id}" value="${p.img||''}" placeholder="https://…"></td>
+    <td><button class="up-btn" onclick="updProd(${p.id},'${type}')">Update</button></td>
+  </tr>`;
+}
+function renderPartsInv(){
+  const q=(document.getElementById('pi-search').value||'').toLowerCase();
+  const rows=parts.filter(p=>!q||p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q));
+  document.getElementById('pi-tbody').innerHTML=rows.map(p=>mkInvRow(p,'parts')).join('');
+  document.getElementById('pi-upd').textContent='Updated: '+new Date().toLocaleTimeString();
+}
+function renderOilsInv(){
+  const q=(document.getElementById('oi-search').value||'').toLowerCase();
+  const rows=oils.filter(p=>!q||p.name.toLowerCase().includes(q)||p.sku.toLowerCase().includes(q));
+  document.getElementById('oi-tbody').innerHTML=rows.map(p=>mkInvRow(p,'oils',`<td style="font-size:11px;color:var(--gold)">${p.brand}${p.dealer?' ★':''}</td>`)).join('');
+  document.getElementById('oi-upd').textContent='Updated: '+new Date().toLocaleTimeString();
+}
+function updProd(id,type){
+  const arr=type==='oils'?oils:parts;
+  const p=arr.find(x=>x.id===id);
+  const qty=parseInt(document.getElementById(`qty-${type}-${id}`).value);
+  const pr=parseFloat(document.getElementById(`pr-${type}-${id}`).value);
+  const img=document.getElementById(`img-${type}-${id}`).value.trim();
+  if(isNaN(qty)||qty<0){showToast('Invalid quantity');return;}
+  if(isNaN(pr)||pr<0){showToast('Invalid price');return;}
+  p.stock=qty;p.price=pr;if(img)p.img=img;
+  if(type==='oils')renderOilsInv();else renderPartsInv();
+  renderFeatured();renderAdminStats();showToast('✓ '+p.name+' updated');
+}
+function simRefresh(type){
+  const arr=type==='oils'?oils:parts;
+  arr.forEach(p=>{p.stock=Math.max(0,p.stock+Math.floor(Math.random()*6)-2);});
+  if(type==='oils')renderOilsInv();else renderPartsInv();
+  renderFeatured();renderAdminStats();showToast('✓ Stock refreshed (simulated)');
+}
+function exportInv(type){
+  const arr=type==='oils'?oils:parts;
+  const rows=['sku,name,category,price,stock,brand,compatibility,img'+(type==='oils'?',dealer':'')];
+  arr.forEach(p=>rows.push(`${p.sku},"${p.name}","${p.cat}",${p.price.toFixed(3)},${p.stock},"${p.brand}","${p.compat}","${p.img||''}"${type==='oils'?','+(p.dealer?'true':'false'):''}`));
+  dl('data:text/csv;charset=utf-8,'+encodeURIComponent(rows.join('\n')),`autopro-${type}-${today()}.csv`);showToast('✓ Exported');
+}
+
+function aTab(name){
+  const tabs=['orders','parts-inv','oils-inv','upload','email','password'];
+  document.querySelectorAll('.atab').forEach((t,i)=>t.classList.toggle('on',tabs[i]===name));
+  document.querySelectorAll('.admin-sub').forEach(s=>s.classList.remove('on'));
+  document.getElementById('atab-'+name).classList.add('on');
+  if(name==='parts-inv')renderPartsInv();
+  if(name==='oils-inv')renderOilsInv();
+}
+function loadEmailCfg(){
+  emailCfg=JSON.parse(localStorage.getItem('ap-ecfg')||'{}');
+  ['ej-pk','ej-sid','ej-tid','ej-to'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=[emailCfg.pk,emailCfg.sid,emailCfg.tid,emailCfg.to][i]||'';});
+  document.getElementById('cfg-st').innerHTML=emailCfg.pk?'<span style="color:#81C784">✓ Email alerts active</span>':'<span style="color:var(--g2)">Not configured — orders saved locally only</span>';
+}
+function saveEmail(){
+  const cfg={pk:document.getElementById('ej-pk').value.trim(),sid:document.getElementById('ej-sid').value.trim(),tid:document.getElementById('ej-tid').value.trim(),to:document.getElementById('ej-to').value.trim()};
+  if(!cfg.pk||!cfg.sid||!cfg.tid){showToast('Fill all three EmailJS fields');return;}
+  localStorage.setItem('ap-ecfg',JSON.stringify(cfg));emailCfg=cfg;emailjs.init(cfg.pk);
+  emailjs.send(cfg.sid,cfg.tid,{ref:'TEST-001',type:'TEST',customer:'Test User',mobile:'+973 0000 0000',email:cfg.to,vehicle:'Test Vehicle',items:'Sample Part × 1',total:'BD 1.000',notes:'Test from AutoPro.',to_email:cfg.to})
+    .then(()=>{document.getElementById('cfg-st').innerHTML='<span style="color:#81C784">✓ Saved! Test email sent.</span>';showToast('✓ Config saved & test sent');})
+    .catch(e=>{document.getElementById('cfg-st').innerHTML=`<span style="color:#F87171">Saved but test failed: ${e.text||e}</span>`;showToast('Saved — check your EmailJS IDs');});
+}
+
+// CSV/JSON Upload
+function dragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag');}
+function dragLeave(){document.getElementById('upload-zone').classList.remove('drag');}
+function dropFile(e){e.preventDefault();dragLeave();const f=e.dataTransfer.files[0];if(f)handleFile(f);}
+function handleFile(file){
+  if(!file)return;
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(!['csv','json'].includes(ext)){showToast('Only .csv and .json supported');return;}
+  const reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      let data=ext==='csv'?parseCSV(e.target.result):JSON.parse(e.target.result);
+      if(!Array.isArray(data))throw new Error('JSON must be an array');
+      if(!data.length){showToast('File is empty');return;}
+      pendingUpload=data;showUploadPreview(data,file.name);
+    }catch(err){showToast('Error: '+err.message);}
+  };
+  reader.readAsText(file);
+}
+function parseCSV(text){
+  const lines=text.trim().split('\n');if(lines.length<2)throw new Error('Need header + data');
+  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
+  if(!headers.includes('sku'))throw new Error('Missing required column: sku');
+  return lines.slice(1).filter(l=>l.trim()).map(line=>{const vals=[];let cur='';let inQ=false;for(let i=0;i<line.length;i++){if(line[i]==='"'){inQ=!inQ;}else if(line[i]===','&&!inQ){vals.push(cur.trim());cur='';}else cur+=line[i];}vals.push(cur.trim());const obj={};headers.forEach((h,i)=>obj[h]=(vals[i]||'').replace(/^"|"$/g,'').trim());return obj;}).filter(r=>r.sku);
+}
+function showUploadPreview(data,filename){
+  const target=document.getElementById('upload-target').value;
+  const arr=target==='oils'?oils:parts;
+  const mode=document.querySelector('input[name="up-mode"]:checked').value;
+  let added=0,updated=0,unchanged=0;
+  const rows=data.slice(0,20).map(row=>{
+    const ex=arr.find(p=>p.sku.toLowerCase()===row.sku.toLowerCase());
+    let st,sc;
+    if(!ex){added++;st='NEW';sc='#81C784';}
+    else if((row.stock!==undefined&&parseInt(row.stock)!==ex.stock)||(row.price!==undefined&&parseFloat(row.price)!==ex.price)){updated++;st='UPDATE';sc='#FCD34D';}
+    else{unchanged++;st='NO CHANGE';sc='var(--g2)';}
+    return`<tr><td style="font-family:var(--fm)">${row.sku}</td><td>${row.name||ex?.name||'—'}</td><td style="color:var(--g2)">${row.category||row.cat||ex?.cat||'—'}</td><td style="font-family:var(--fm)">${row.price!==undefined?parseFloat(row.price).toFixed(3):ex?ex.price.toFixed(3):'—'}</td><td style="font-family:var(--fm)">${row.stock!==undefined?row.stock:'—'}</td><td style="color:${sc};font-family:var(--fm);font-size:10px">${st}</td></tr>`;
+  }).join('');
+  document.getElementById('preview-count').textContent=`${data.length} rows from "${filename}" → ${target.toUpperCase()}${data.length>20?' (first 20)':''}`;
+  document.getElementById('preview-stats').innerHTML=`<span style="color:#81C784">+${added} new</span><span style="color:#FCD34D">↑${updated} updates</span><span>${unchanged} unchanged</span><span style="color:var(--g2)">Mode:${mode}</span>`;
+  document.getElementById('preview-tbody').innerHTML=rows;
+  document.getElementById('upload-preview').style.display='block';
+}
+function applyUpload(){
+  if(!pendingUpload){showToast('No file loaded');return;}
+  const target=document.getElementById('upload-target').value;
+  let arr=target==='oils'?oils:parts;
+  const mode=document.querySelector('input[name="up-mode"]:checked').value;
+  let added=0,updated=0,nextId=Math.max(...[...parts,...oils].map(p=>p.id))+1;
+  if(mode==='replace'){
+    const newArr=pendingUpload.map((r,i)=>({id:nextId+i,sku:r.sku,name:r.name||r.sku,cat:r.category||r.cat||'Uncategorised',icon:'🛢️',img:r.img||'',brand:r.brand||'—',compat:r.compatibility||r.compat||'—',price:parseFloat(r.price)||0,stock:parseInt(r.stock)||0,min:parseInt(r.min)||5,dealer:r.dealer==='true'||r.dealer===true}));
+    if(target==='oils'){oils=newArr;}else{parts=newArr;}added=newArr.length;
+  }else{
+    pendingUpload.forEach(r=>{
+      const ex=arr.find(p=>p.sku.toLowerCase()===r.sku.toLowerCase());
+      if(ex){if(r.stock!==undefined)ex.stock=parseInt(r.stock)||0;if(r.price!==undefined)ex.price=parseFloat(r.price)||ex.price;if(r.name)ex.name=r.name;if(r.category||r.cat)ex.cat=r.category||r.cat;if(r.brand)ex.brand=r.brand;if(r.img)ex.img=r.img;updated++;}
+      else{arr.push({id:nextId++,sku:r.sku,name:r.name||r.sku,cat:r.category||r.cat||'Uncategorised',icon:'🛢️',img:r.img||'',brand:r.brand||'—',compat:r.compatibility||r.compat||'—',price:parseFloat(r.price)||0,stock:parseInt(r.stock)||0,min:parseInt(r.min)||5,dealer:r.dealer==='true'||r.dealer===true});added++;}
+    });
+  }
+  renderFeatured();renderAdminStats();cancelUpload();showToast(`✓ ${added} added, ${updated} updated`,4000);
+}
+function cancelUpload(){pendingUpload=null;document.getElementById('upload-preview').style.display='none';document.getElementById('file-in').value='';}
+function dlCSVTemplate(){dl('data:text/csv;charset=utf-8,'+encodeURIComponent('sku,name,category,price,stock,brand,compatibility,img,dealer\nPNT-001,Panta R100 Racing Fuel,Racing Fuel,18.500,40,Panta,All racing engines,https://url.jpg,true\nENG-001,Toyota Oil Filter,Filters & Fluids,1.800,45,Toyota,Camry 2018-2023,https://url.jpg,false'),'autopro-template.csv');showToast('✓ Template downloaded');}
+function dlJSONTemplate(){dl('data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify([{sku:'PNT-001',name:'Panta R100 Racing Fuel',category:'Racing Fuel',price:18.500,stock:40,brand:'Panta',compatibility:'All racing engines',img:'',dealer:true},{sku:'ENG-001',name:'Toyota Oil Filter',category:'Filters & Fluids',price:1.800,stock:45,brand:'Toyota',compatibility:'Camry 2018-2023',img:'',dealer:false}],null,2)),'autopro-template.json');showToast('✓ Template downloaded');}
+function exportCurrentCSV(){const target=document.getElementById('upload-target').value;exportInv(target);}
+
+// ═══════════════════════════════════════════
+// ADMIN AUTH
+// ═══════════════════════════════════════════
+const ADMIN_SESSION_KEY='ap-admin-session';
+const ADMIN_PWD_KEY='ap-admin-pwd';
+const ADMIN_LOCK_KEY='ap-admin-lock';
+function hashPwd(pwd){let h=0;for(let i=0;i<pwd.length;i++){h=((h<<5)-h)+pwd.charCodeAt(i);h|=0;}return'ap_'+Math.abs(h).toString(36)+'_'+pwd.length;}
+function getStoredHash(){return localStorage.getItem(ADMIN_PWD_KEY)||hashPwd('admin123');}
+function isAdminLoggedIn(){const s=JSON.parse(localStorage.getItem(ADMIN_SESSION_KEY)||'null');if(!s)return false;if(Date.now()>s.expires){localStorage.removeItem(ADMIN_SESSION_KEY);return false;}return true;}
+function getLockData(){return JSON.parse(localStorage.getItem(ADMIN_LOCK_KEY)||'{"attempts":0,"lockedUntil":0}');}
+function saveLockData(d){localStorage.setItem(ADMIN_LOCK_KEY,JSON.stringify(d));}
+function requireAdmin(){
+  if(isAdminLoggedIn()){gPage('admin');return;}
+  document.getElementById('admin-pwd-inp').value='';
+  document.getElementById('login-err').textContent='';
+  document.getElementById('admin-login-overlay').style.display='flex';
+  setTimeout(()=>document.getElementById('admin-pwd-inp').focus(),100);
+  updateLockUI();
+}
+function closeAdminLogin(){document.getElementById('admin-login-overlay').style.display='none';}
+function updateLockUI(){
+  const lock=getLockData();
+  const attEl=document.getElementById('login-attempts');
+  if(Date.now()<lock.lockedUntil){
+    const mins=Math.ceil((lock.lockedUntil-Date.now())/60000);
+    document.getElementById('login-err').textContent=`Too many failed attempts. Locked for ${mins} minute${mins>1?'s':''}.`;
+    document.getElementById('admin-pwd-inp').disabled=true;
+    document.querySelector('.login-btn').disabled=true;
+    attEl.textContent='';setTimeout(updateLockUI,10000);
+  }else{
+    document.getElementById('admin-pwd-inp').disabled=false;
+    document.querySelector('.login-btn').disabled=false;
+    const rem=5-lock.attempts;
+    attEl.textContent=lock.attempts>0?`${rem} attempt${rem!==1?'s':''} remaining`:'';
+  }
+}
+function doLogin(){
+  const lock=getLockData();
+  if(Date.now()<lock.lockedUntil){updateLockUI();return;}
+  const pwd=document.getElementById('admin-pwd-inp').value;
+  if(!pwd){document.getElementById('login-err').textContent='Please enter the password.';return;}
+  if(hashPwd(pwd)===getStoredHash()){
+    lock.attempts=0;lock.lockedUntil=0;saveLockData(lock);
+    localStorage.setItem(ADMIN_SESSION_KEY,JSON.stringify({expires:Date.now()+7200000}));
+    document.getElementById('admin-login-overlay').style.display='none';
+    document.getElementById('admin-pwd-inp').value='';
+    gPage('admin');showToast('✓ Welcome to Admin Panel');
+  }else{
+    lock.attempts++;
+    if(lock.attempts>=5){lock.lockedUntil=Date.now()+900000;lock.attempts=0;}
+    saveLockData(lock);
+    document.getElementById('admin-pwd-inp').value='';
+    updateLockUI();
+    if(Date.now()>=lock.lockedUntil)document.getElementById('login-err').textContent='Incorrect password.';
+  }
+}
+function doLogout(){localStorage.removeItem(ADMIN_SESSION_KEY);gPage('home');showToast('Logged out');}
+function changePassword(){
+  const current=document.getElementById('pwd-current').value;
+  const newPwd=document.getElementById('pwd-new').value;
+  const confirm=document.getElementById('pwd-confirm').value;
+  const msg=document.getElementById('pwd-msg');
+  if(hashPwd(current)!==getStoredHash()){msg.innerHTML='<span style="color:#F87171">✗ Current password incorrect.</span>';return;}
+  if(newPwd.length<8){msg.innerHTML='<span style="color:#F87171">✗ Minimum 8 characters.</span>';return;}
+  if(newPwd!==confirm){msg.innerHTML='<span style="color:#F87171">✗ Passwords do not match.</span>';return;}
+  localStorage.setItem(ADMIN_PWD_KEY,hashPwd(newPwd));
+  ['pwd-current','pwd-new','pwd-confirm'].forEach(id=>document.getElementById(id).value='');
+  msg.innerHTML='<span style="color:#81C784">✓ Password updated successfully.</span>';
+  showToast('✓ Password changed');
+}
+setInterval(()=>{if(document.getElementById('page-admin').classList.contains('on')&&!isAdminLoggedIn()){showToast('Session expired. Please login again.');gPage('home');setTimeout(requireAdmin,800);}},60000);
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+renderFeatured();
+filterParts();
+renderOilsBrandPills();
+filterOils();
+renderWorkshop('All');
+updateCartUI();
+genCap();
+</script>
+</body>
+</html>
